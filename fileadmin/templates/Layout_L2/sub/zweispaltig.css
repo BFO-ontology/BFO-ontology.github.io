@@ -1,0 +1,66 @@
+/* @group grundgeruest */
+
+div#top {
+	width:		1000px;
+	height:		310px;
+	text-align:	left;
+	}
+div#content1 {
+	width:		450px;
+	float:		left;
+	margin:		0;
+	padding:	0;
+	}
+div#content2 {
+	width:		200px;
+	float:		right;
+	right:		60px; 
+	position:	relative;
+	}
+
+div#content1 img {
+	max-width:	100%;
+	height:		auto;
+	}
+div#content2 img {
+	max-width:	100%;
+	height:		auto;
+	}
+
+
+#bereich2_t div.csc-textpic.csc-textpic-left.csc-textpic-above div.csc-textpic-imagewrap dl.csc-textpic-image.csc-textpic-firstcol.csc-textpic-lastcol {
+	margin:		0 0 0 -1px;
+	padding-right:	0;
+	padding-top:	0;
+	padding-bottom:	0;
+}
+
+/* @end */
+
+/* @group rechte spalte */
+
+dl.csc-textpic-image.csc-textpic-lastcol {
+	margin:	0;
+	}
+
+div.verlauf-oben1 {
+	background:	url(../main/images/abschluss_artikel_rechts.jpg) no-repeat 0 top;
+	margin-top:	2em;
+	}
+
+div.verlauf-oben1 div.csc-header.csc-header-n2 {
+	padding-top:	6px;
+	margin-top:	10px;
+	} 
+
+div.verlauf-oben2 {
+	background:	url(../main/images/abschluss_artikel_rechts.jpg) no-repeat 0 top;
+	margin-top:	2em;
+	}
+
+div.verlauf-oben2 div.csc-header.csc-header-n2 {
+	padding-top:	6px;
+	margin-top:	10px;
+	}
+
+/* @end */
