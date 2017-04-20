@@ -1,123 +1,90 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE html
-    PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xml:lang="de" lang="de" xmlns="http://www.w3.org/1999/xhtml">
-<head>
+<html>
+  <head>
+    <title>Basic Formal Ontology (BFO) | First-Order Logic Based Implementation</title>
+    <link rel="stylesheet" href="stylesheet.css" type="text/css"/>
+  <body>
+    <table align="center">
+      <tr>
+        <td id="body-left" rowspan="5"><img src="gfx/body-bottom-left.gif"></td>
+        <td id="header-left" nowrap="true"><a href="."><span id="logo-left">BFO</span><span id="logo-right">Basic Formal Ontology</span></h1></a></td>
+	<td id="header-right"><a href="/"><img src="gfx/ifomis-small.gif"/></a></td>
+        <td id="body-right" rowspan="5"><img src="gfx/body-bottom-right.gif"></td>
+      </tr>
+      <tr>
+        <td id="menu-left" nowrap="true"><a href=".">Home</a><a href="https://github.com/bfo-ontology/BFO/wiki">GitHub</a><a href="https://mitpress.mit.edu/building-ontologies">Guidebook</a><a href="publications.html">Publications</a><a href="fol.html">FOL</a><a href="users.html">Users</a><a href="/">IFOMIS</a></td>
+        <td id="menu-right" nowrap="true"><!-- <form action="http://www.ifomis.org/bfo/search" id="searchbox_001350809378860557623:_axouurrf3a"><input type="hidden" name="cx" value="001350809378860557623:_axouurrf3a"/><input type="hidden" name="cof" value="FORID:11"/><input type="text" name="q" size="30"/>&nbsp;<input type="submit" name="sa" value="Search"/></form><script type="text/javascript" src="http://www.google.com/coop/cse/brand?form=searchbox_001350809378860557623%3A_axouurrf3a&lang=de"></script--></td>
+      </tr>
+      <tr> 
+        <td id="content" colspan="2">
+          <h2>First-Order Logic Based Implementation</h2>
 
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<!-- 
-	This website is powered by TYPO3 - inspiring people to share!
-	TYPO3 is a free open source Content Management Framework initially created by Kasper Skaarhoj and licensed under GNU/GPL.
-	TYPO3 is copyright 1998-2016 of Kasper Skaarhoj. Extensions are copyright of their respective owners.
-	Information and contribution at http://typo3.org/
+<p>
+  As pointed out elsewhere, <em>BFO</em> has been applied successfully as a methodological tool in a wide range of areas.
+  However <em>BFO</em> is still lacking a computational realization that can serve as the computational basis for the formal integration of the various ontologies that are to be included in the OBO-foundry as described elsewhere.
+  The core of <em>BFO</em> (<em>BFO core</em>), a non-extensional temporal mereology with collections, sums, and universals [1] was recently implemented in Isabelle [2] a generic system for the implementation and rapid prototyping of logical formalisms.
+  This computational representation of the <em>BFO core</em> including the definitions and axioms and the proofs of all theorems can be accessed from <a href="http://www.acsu.buffalo.edu/~bittner3/Theories/BFO">this webpage</a>.
+  Isabelle is distributed for free under the BSD license and can be downloaded for a wide range of operation systems from the <a href="http://isabelle.in.tum.de/">Isabelle website</a>.
+</p>
+
+<p>
+  The Isabelle-based computational representation of the <em>BFO core</em> will be used as follows:
+  
+  <ul>
+    <li>As a basis to extend this core until it incorporates all of <em>BFO</em> (in particular [3-14]) together with theorems that verify the correctness of reasoning rules that are supported by <em>BFO</em>.</li>
+    <li>As a basis of derived domain ontologies that contains more domain-specific notions such as the Gene Ontology [15],  the Foundational Model of Anatomy [16], etc.</li>
+  </ul>
+
+  In both cases the <em>BFO core</em> and its representation within the Isabelle system provide a computational environment that makes it easy to provide such extensions in a coherent, efficient, and logically rigorous way.
+</p>
+
+<p>
+ <img src="gfx/alert.gif" align="absbottom"/> <em>Attention:</em> The theory is still under development and undergoes almost daily changes!
+</p>
+
+<h3>References</h3>
+
+<ol>
+  <li><a href="http://web.me.com/tbittner1/BittnerProfessional/Publications_files/Bittner-NA-2006-28.pdf">Bittner, T., M. Donnelly, and B. Smith, A Spatio-Temporal Top-Level Ontology for Geographic Information Processing, in Technical report, Department of Philosophy, SUNY Buffalo. 2007.</a></li>
+  <li><a href="http://www.acsu.buffalo.edu/~bittner3/BittnerQR2007.pdf">Bittner, T. and M. Donnelly, A formal theory of parthood, connectedness, and qualitative size and distance relations among anatomical entities, In C. Price, editor, Proc. of the 21st Annual Workshop on Qualitative Reasoning (QR07), 2007.</a></li>
+  <li><a href="http://www.acsu.buffalo.edu/~bittner3/BittnerDonnellyFOIS06.pdf">Bittner, T. and M. Donnelly. A theory of granular parthood based on qualitative cardinality and size measures. in Proceedings of the fourth International Conference on Formal Ontology in Information Systems, FOIS06. 2006.</a></li>
+  <li><a href="http://www.acsu.buffalo.edu/~bittner3/BittnerDonnellyAAAI2007.pdf">Bittner, T. and M. Donnelly. A temporal mereology for distinguishing between integral objects and portions of stuff. In R. Holte and A. Howe (eds.), Proceedings of the Twenty-Second AAAI Conference on Artificial Intelligence (AAAI-07).</a></li>
+  <li><a href="http://www.ncbi.nlm.nih.gov/pmc/articles/PMC1560437/?tool=pubmed">Donnelly, M., Containment relations in anatomical ontologies, in AIMA Annual Symposium Proceedings. 2005. p. 206-210.</a></li>
+  <li><a href="http://www.mendeley.com/research/spatial-relations-between-classes-of-individuals/">Donnelly, M. and T. Bittner. Spatial relations between classes of individuals. in Spatial Information Theory. Cognitive and Computational Foundations of Geographic Information Science. International Conference (COSIT 2005). 2005: Springer Verlag.</a></li>
+  <li><a href="http://web.me.com/tbittner1/BittnerProfessional/Publications_files/Endurants%20and%20perdurants%20in%20directly%20depicting%20ontologies.pdf">Bittner, T., M. Donnelly, and B. Smith, Endurants and Perdurants in Directly Depicting Ontologies. AI Communications, 2004. 14(4): p. 247-258.</a></li>
+  <li><a href="documents/IR-0303_Donnelly.pdf">Donnelly, M. On Parts and Holes: The Spatial Structure of the Human Body. in Proceedings of the 11th World Congress on Medical Informatics (MedInfo-04). 2004.</a></li>
+  <li><a href="http://genomebiology.com/2005/6/5/R46">Smith, B., et al., Relations in Biomedical Ontologies. Genome Biology, 2005. 6(5): p. r46.</a></li>
+  <li><a href="http://ontology.buffalo.edu/medo/biodynamic.pdf">Grenon, P., B. Smith, and L. Goldberg. Biodynamic Ontology: Applying <em>BFO</em> in the Biomedical Domain. in Ontologies in Medicine: Proceedings of the Workshop on Medical Ontologies. 2003: IOS Press, Amsterdam.</a></li>
+  <li><a href="http://ontology.buffalo.edu/smith/articles/SNAP_SPAN.pdf">Grenon, P. and B. Smith, SNAP and SPAN: Towards Dynamic Spatial Ontology. Spatial Cognition and Computation, 2004. 4(1): p. 69--103.</a></li>
+  <li><a href="http://ontology.buffalo.edu/smith/articles/cornucopia.pdf">Smith, B. and P. Grenon, The Cornucopia of Formal-Ontological Relations, in Dialectica 58: 3 (2004), 279–296.</a></li>
+  <li><a href="http://sigpubs.biostr.washington.edu/archive/00000135/">Rosse, C. and J.L.V. Mejino, A Reference Ontology for Bioinformatics: The Foundational Model of Anatomy. Journal of Biomedical Informatics, 2003. 36: p. 478-500.</a></li>
+  <li><a href="http://sigpubs.biostr.washington.edu/archive/00000204/01/FMA_Chapter_final.pdf">Rosse, C. and Mejino, J. The Foundational Model of Anatomy Ontology, in Burger, A and Davidson, D and Baldock, R, Eds. Anatomy Ontologies for Bioinformatics: Principles and Practice, pages pp. 59-117. Springer, 2007.</a></li>
+  <li><a href="http://krr.meraka.org.za/~aow2010/Trentelman-etal.pdf">Trentelman, K., Smith, B. An Axiomatisation of Basic Formal Ontology with Projection Functions”, Advances in Ontologies, Proceedings of the Sixth Australasian Ontology Workshop, Adelaide, 7 December 2010, Kerry Taylor, Thomas Meyer and Mehmet Orgun (eds.), 2010, Sydney: ACS, 71-80.</a></li>
+</ol>
+
+<p>
+  Further relevant papers can be found <a href="http://www.acsu.buffalo.edu/~bittner3/publications.html">here</a>.
+</p>
+
+        </td>
+      </tr>
+      <tr>
+        <td id="footer" colspan="2">Last changed by Alan Ruttenberg on 20 April 2017</td>
+      </tr>
+      <tr>
+        <td id="body-bottom-left"><img src="gfx/body-bottom-center-left.gif"/></td>
+        <td id="body-bottom-right"><img src="gfx/body-bottom-center-right.gif"/></td>
+      </tr>
+    </table>
+<!--
+<script type="text/javascript">
+      var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+      document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+    </script>
+    <script type="text/javascript">
+      var pageTracker = _gat._getTracker("UA-3118124-4");
+      pageTracker._initData();
+      pageTracker._trackPageview();
+    </script>
 -->
-
-
-<title>Institute for Formal Ontology and Medical Information Science | IFOMIS</title>
-<meta name="generator" content="TYPO3 CMS" />
-<meta name="keywords" content="Universität, Saarland, Saarbrücken, Homburg" />
-
-
-<link rel="stylesheet" type="text/css" href="../fileadmin/templates/css/style.css" media="all" />
-<link rel="stylesheet" type="text/css" href="../fileadmin/templates/css/extensions.css" media="all" />
-
-
-
-
-<script src="typo3temp/javascript.js" type="text/javascript"></script>
-
-
-
-
-	<link rel="stylesheet" type="text/css" href="../fileadmin/templates/Layout_L2/sub/zweispaltig.css" />
-	<link rel="icon" href="/favicon.ico" /><script>if (self == top) { document.documentElement.style.display = 'block'; }else { top.location = self.location; }</script><link rel="stylesheet" type="text/css" media="screen" href="../fileadmin/templates/Layout_L2/main/Layout_L2.css"><link rel="stylesheet" type="text/css" media="print" href="../fileadmin/templates/Layout_L2/main/Layout_L2.css">
-<link rel="schema.DCTERMS" href="http://purl.org/dc/terms/"/>
-<meta name="DCTERMS.title" content="Institute for Formal Ontology and Medical Information Science"/>
-<meta name="copyright" content="2016 - Universität des Saarlandes"/>
-<meta name="DCTERMS.rights" content="2016 - Universität des Saarlandes"/>
-<meta name="date" content="2016-07-08T08:18:12+02:00"/>
-<meta name="DCTERMS.date" content="2016-07-08T08:18:12+02:00"/>
-<meta name="robots" content="index,follow"/>
-<meta name="ICBM" content="49.254986 N, 7.039683 E"/>
-<meta name="geo.position" content="49.254986 N;7.039683 E"/>
-<meta name="geo.region" content="DE-SL"/>
-<meta name="geo.placename" content="Saarbrücken"/>
-<!-- link rel="canonical" href="http://ifomis.org/institut/ifomis.html"/-->
-<meta property="og:site_name" content="IFOMIS"/>
-<meta property="og:title" content="Institute for Formal Ontology and Medical Information Science"/>
-<meta property="og:type" content="article"/>
-<meta property="og:latitude" content="49.254986 N"/>
-<meta property="og:longitude" content="7.039683 E"/>
-<meta property="og:locality" content="Saarbrücken"/>
-<meta property="og:region" content="DE-SL"/>
-
-
-
-</head>
-<body>
-
-
-
-    <div id="website">
-
-	<div id="header">
-	    <div id="portal_motiv_lang">
-	    
-	    </div>
-
-	    <div id="kopfbereich1">
-                <div id="signet"><div id="c8" class="csc-default"><a href="/"><img src="../fileadmin/templates/gif/logo_uds.png" border="0" height="49" width="175" alt="" data-htmlarea-file-uid="78116" data-htmlarea-file-table="sys_file" style="" /></a></div><div class="clear"></div></div>
-	    </div>
-	    <div id="kopfbereich2">
-		<div id="portal_motiv">
-		<div id="c83021" class="csc-default"><div class="csc-textpic csc-textpic-left csc-textpic-above csc-textpic-equalheight"><div class="csc-textpic-imagewrap"><div class="csc-textpic-image csc-textpic-last"><img src="../fileadmin/_processed_/csm_ifomis_logo.jpg" width="273" height="79" alt="" border="0" /></div></div></div></div><div id="c133522" class="csc-default"><div class="csc-header csc-header-n1"><h1 class="csc-firstHeader"><a href="institut/ifomis.html" target="_self">Institute for Formal Ontology and Medical Information Science (IFOMIS)</a></h1></div></div>
-		</div>
-		<div class="clear"></div>
-	    </div>
-	    <div id="kopfbereich3">
-		<div id="portal_logo">
-		
-		</div>
-		<div id="sprache_Layout2">
-		    <br />
-		    <div class="clear"></div>
-		</div>
-		<div class="clear"></div>
-	    </div>
-
-	    <div id="headerline">
-		<img border="0" alt="Erste Linie Header" src="/fileadmin/templates/Layout_L2/main/images/linie_1.jpg" />
-	    </div>
-	    <div class="clear"></div>
-	</div>
-	<div class="clear"></div>
-
-	<div id="content">
-	    <div id="menulevels">
-		<ul class="menublock_l2"><li class="normal minus"><a href="institut/ifomis.html" target="_self" title="Home">Home</a></li><li class="normal minus"><a href="institut/ifomis/history.html" target="_self" title="History">History</a></li><li class="normal minus"><a href="institut/ifomis/people.html" target="_self" title="People">People</a></li><li class="normal minus"><a href="institut/ifomis/partners.html" target="_self" title="Partners">Partners</a></li><li class="normal plus"><a href="institut/ifomis/activities.html" target="_self" title="Activities">Activities</a></li><li class="normal minus"><a href="institut/ifomis/projects.html" target="_self" title="Projects">Projects</a></li><li class="normal minus"><a href="institut/ifomis/contact.html" target="_self" title="Contact">Contact</a></li></ul>
-		<div class="clear"></div>
-	    </div>
-	    
-	<!-- TYPO3SEARCH_begin -->
-	<div id="content1" class="cont1_2"><div id="c83023" class="csc-default"><p>The Institute for Formal Ontology and Medical Information Science (IFOMIS) is a research group at the Philosophy Institute of Saarland University. Its main research and development activities are:</p><ol><li>the&nbsp;investigation of the&nbsp;philosophical and logical&nbsp;foundations of formal ontologies in information science, in particular the&nbsp;Basic Formal Ontology;</li><li>the development and refinement&nbsp;of domain ontologies especially for the biomedical area, in particular a&nbsp;middle-layer ontology for the biomedical domain, the so-called Health-data Ontology Trunk (HDOT);</li><li>the development of ontology-based data&nbsp;integration strategies for ensuring semantic interoperability, combining a middle-layer ontology and&nbsp;a semi-automated ontology aggregator tool.</li></ol><p>Historically,&nbsp;IFOMIS originated in April 2002 utilizing the <a href="http://www.humboldt-foundation.de/web/wolfgang-paul-award.html" title="Opens external link in new window" target="_blank" class="external-link-new-window">Wolfgang Paul Award&nbsp;of the Alexander von Humboldt Foundation</a>&nbsp;to Prof. Barry Smith. Substantial funding was provided also by the <a href="http://www.volkswagenstiftung.de/" title="Opens external link in new window" target="_blank" class="external-link-new-window">Volkswagen&nbsp;Foundation</a> and by the <a href="http://cordis.europa.eu/home_en.html" title="Opens external link in new window" target="_blank" class="external-link-new-window">European Commission</a>.</p>
-<p>&nbsp;</p>
-<p>IFOMIS comprehends an interdisciplinary research group, with members from Philosophy, Computer and Information Science, Logic, Medicine, and Medical Informatics.</p>
-<p>&nbsp;</p>
-<p>Inquiries regarding long- and short-term research visits are welcome.</p></div></div>
-	<div id="content2" class="cont2_2"></div>
-	<!-- TYPO3SEARCH_end -->
-
-	    <div class="clear"></div>
-	</div>
-
-        <div class="clear"></div>
-    </div>
-<script src="/fileadmin/templates/js/JavaScripts.js" type="text/javascript"></script>
-
-<script src="typo3temp/javascript.js" type="text/javascript"></script>
-
-</body>
+  </body>
 </html>
-<!-- Cached page generated 19-04-17 07:46. Expires 21-04-17 07:46 -->
-<!-- Parsetime: 0ms -->
