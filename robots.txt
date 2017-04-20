@@ -1,0 +1,13 @@
+# robots.txt for http://www.uni-saarland.de
+
+User-agent: *
+Disallow: /~
+Disallow: /stats/
+Disallow: /icons/
+Disallow: /images/
+Disallow: /index.php
+Disallow: /fileadmin/templates/
+Disallow: /nc/
+Disallow: /typo3temp/
+
+
