@@ -5,43 +5,25 @@
   <body>
     <table align="center">
       <tr>
-        <td id="body-left" rowspan="5"><img src="gfx/body-bottom-left.gif"></td>
         <td id="header-left" nowrap="true"><a href="."><span id="logo-left">BFO</span><span id="logo-right">Basic Formal Ontology</span></h1></a></td>
-	<!--td id="header-right"><a href="/"><img src="gfx/ifomis-small.gif"/></a></td-->
-        <td id="body-right" rowspan="5"><img src="gfx/body-bottom-right.gif"></td>
+	<td id="header-right"><!--<a href="/"><img src="gfx/ifomis-small.gif"/></a>--></td>
       </tr>
       <tr>
-        <td id="menu-left" nowrap="true"><a href=".">Home</a><a href="https://github.com/bfo-ontology/BFO/wiki">GitHub</a><a href="https://mitpress.mit.edu/building-ontologies">Guidebook</a><a href="publications.html">Publications</a><a href="fol.html">FOL</a><a href="users.html">Users</a><!--a href="/">IFOMIS</a--></td>
-        <td  nowrap="true"><!--<form action="http://www.ifomis.org/bfo/search" id="searchbox_001350809378860557623:_axouurrf3a"><input type="hidden" name="cx" value="001350809378860557623:_axouurrf3a"/><input type="hidden" name="cof" value="FORID:11"/><input type="text" name="q" size="30"/>&nbsp;<input type="submit" name="sa" value="Search"/></form><script type="text/javascript" src="http://www.google.com/coop/cse/brand?form=searchbox_001350809378860557623%3A_axouurrf3a&lang=de"></script>--></td>
+        <td id="menu-left" nowrap="true"><a href=".">Home</a><a href="https://github.com/bfo-ontology/BFO/wiki">GitHub</a><a href="https://mitpress.mit.edu/building-ontologies">Guidebook</a><a href="publications.html">Publications</a><a href="fol.html">FOL</a><a href="users.html">Users</a><!--a href="/">IFOMIS</a-->
+	<a href="https://buffalo.box.com/s/u4r7ji8hhnejso7u1aufh3mkeludwngu">Tutorials</a>
+	<a href="https://buffalo.box.com/s/lk3ykbd6m8edcx19thi1stdd9c2njjec">Workshops</a>
+	<td id="menu-right" nowrap="true">
+	</td>
       </tr>
       <tr> 
         <td id="content" colspan="2">
           <h2>First-Order Logic Based Implementation</h2>
 
+<p>With the publication of the new ISO/IEC 21838-2 standard version of BFO in April 2020, the first-order logic axiomatization of this standard is now available in compiled form <a href="https://buffalo.box.com/v/BFO-2020-FOL">here</a>. A version of these axioms in Common Logic syntax, together with consistency proofs and other material, is available on the ISO Standards Maintenance Portal <a href="https://standards.iso.org/iso-iec/21838/-2/ed-1/en">here</a>. 
+</p>All files are available under a Creative Commons “Attribution 4.0 International” license. 
 <p>
-  As pointed out elsewhere, <em>BFO</em> has been applied successfully as a methodological tool in a wide range of areas.
-  However <em>BFO</em> is still lacking a computational realization that can serve as the computational basis for the formal integration of the various ontologies that are to be included in the OBO-foundry as described elsewhere.
-  The core of <em>BFO</em> (<em>BFO core</em>), a non-extensional temporal mereology with collections, sums, and universals [1] was recently implemented in Isabelle [2] a generic system for the implementation and rapid prototyping of logical formalisms.
-  This computational representation of the <em>BFO core</em> including the definitions and axioms and the proofs of all theorems can be accessed from <a href="http://www.acsu.buffalo.edu/~bittner3/Theories/BFO">this webpage</a>.
-  Isabelle is distributed for free under the BSD license and can be downloaded for a wide range of operation systems from the <a href="http://isabelle.in.tum.de/">Isabelle website</a>.
-</p>
-
-<p>
-  The Isabelle-based computational representation of the <em>BFO core</em> will be used as follows:
-  
-  <ul>
-    <li>As a basis to extend this core until it incorporates all of <em>BFO</em> (in particular [3-14]) together with theorems that verify the correctness of reasoning rules that are supported by <em>BFO</em>.</li>
-    <li>As a basis of derived domain ontologies that contains more domain-specific notions such as the Gene Ontology [15],  the Foundational Model of Anatomy [16], etc.</li>
-  </ul>
-
-  In both cases the <em>BFO core</em> and its representation within the Isabelle system provide a computational environment that makes it easy to provide such extensions in a coherent, efficient, and logically rigorous way.
-</p>
-
-<p>
- <img src="gfx/alert.gif" align="absbottom"/> <em>Attention:</em> The theory is still under development and undergoes almost daily changes!
-</p>
-
-<h3>References</h3>
+An earlier FOL axiomatization of BFO, using the Isabelle language, is still available <a href="http://www.acsu.buffalo.edu/~bittner3/Theories/BFO">here</a> Other 
+<a href="http://krr.meraka.org.za/~aow2010/Trentelman-etal.pdf">This paper</a> describes an axiomatization of BFO using projection functions. Other papers relevant to the first-order logic formalization of BFO are listed below.
 
 <ol>
   <li><a href="http://web.me.com/tbittner1/BittnerProfessional/Publications_files/Bittner-NA-2006-28.pdf">Bittner, T., M. Donnelly, and B. Smith, A Spatio-Temporal Top-Level Ontology for Geographic Information Processing, in Technical report, Department of Philosophy, SUNY Buffalo. 2007.</a></li>
@@ -51,24 +33,14 @@
   <li><a href="http://www.ncbi.nlm.nih.gov/pmc/articles/PMC1560437/?tool=pubmed">Donnelly, M., Containment relations in anatomical ontologies, in AIMA Annual Symposium Proceedings. 2005. p. 206-210.</a></li>
   <li><a href="http://www.mendeley.com/research/spatial-relations-between-classes-of-individuals/">Donnelly, M. and T. Bittner. Spatial relations between classes of individuals. in Spatial Information Theory. Cognitive and Computational Foundations of Geographic Information Science. International Conference (COSIT 2005). 2005: Springer Verlag.</a></li>
   <li><a href="http://web.me.com/tbittner1/BittnerProfessional/Publications_files/Endurants%20and%20perdurants%20in%20directly%20depicting%20ontologies.pdf">Bittner, T., M. Donnelly, and B. Smith, Endurants and Perdurants in Directly Depicting Ontologies. AI Communications, 2004. 14(4): p. 247-258.</a></li>
-  <li><a href="documents/IR-0303_Donnelly.pdf">Donnelly, M. On Parts and Holes: The Spatial Structure of the Human Body. in Proceedings of the 11th World Congress on Medical Informatics (MedInfo-04). 2004.</a></li>
+  <li><a href="http://basic-formal-ontology.org/documents/IR-0303_Donnelly.pdf">Donnelly, M. On Parts and Holes: The Spatial Structure of the Human Body. in Proceedings of the 11th World Congress on Medical Informatics (MedInfo-04). 2004.</a></li>
   <li><a href="http://genomebiology.com/2005/6/5/R46">Smith, B., et al., Relations in Biomedical Ontologies. Genome Biology, 2005. 6(5): p. r46.</a></li>
   <li><a href="http://ontology.buffalo.edu/medo/biodynamic.pdf">Grenon, P., B. Smith, and L. Goldberg. Biodynamic Ontology: Applying <em>BFO</em> in the Biomedical Domain. in Ontologies in Medicine: Proceedings of the Workshop on Medical Ontologies. 2003: IOS Press, Amsterdam.</a></li>
   <li><a href="http://ontology.buffalo.edu/smith/articles/SNAP_SPAN.pdf">Grenon, P. and B. Smith, SNAP and SPAN: Towards Dynamic Spatial Ontology. Spatial Cognition and Computation, 2004. 4(1): p. 69--103.</a></li>
   <li><a href="http://ontology.buffalo.edu/smith/articles/cornucopia.pdf">Smith, B. and P. Grenon, The Cornucopia of Formal-Ontological Relations, in Dialectica 58: 3 (2004), 279–296.</a></li>
-  <li><a href="http://sigpubs.biostr.washington.edu/archive/00000135/">Rosse, C. and J.L.V. Mejino, A Reference Ontology for Bioinformatics: The Foundational Model of Anatomy. Journal of Biomedical Informatics, 2003. 36: p. 478-500.</a></li>
-  <li><a href="http://sigpubs.biostr.washington.edu/archive/00000204/01/FMA_Chapter_final.pdf">Rosse, C. and Mejino, J. The Foundational Model of Anatomy Ontology, in Burger, A and Davidson, D and Baldock, R, Eds. Anatomy Ontologies for Bioinformatics: Principles and Practice, pages pp. 59-117. Springer, 2007.</a></li>
-  <li><a href="http://krr.meraka.org.za/~aow2010/Trentelman-etal.pdf">Trentelman, K., Smith, B. An Axiomatisation of Basic Formal Ontology with Projection Functions”, Advances in Ontologies, Proceedings of the Sixth Australasian Ontology Workshop, Adelaide, 7 December 2010, Kerry Taylor, Thomas Meyer and Mehmet Orgun (eds.), 2010, Sydney: ACS, 71-80.</a></li>
 </ol>
-
-<p>
-  Further relevant papers can be found <a href="http://www.acsu.buffalo.edu/~bittner3/publications.html">here</a>.
-</p>
-
-        </td>
-      </tr>
       <tr>
-        <td id="footer" colspan="2">Last changed by Alan Ruttenberg on 20 April 2017</td>
+        <td id="footer" colspan="2">Last changed by Alan Ruttenberg on 17 March 2020</td>
       </tr>
       <tr>
         <td id="body-bottom-left"><img src="gfx/body-bottom-center-left.gif"/></td>
