@@ -29,6 +29,6 @@ if __name__ == "__main__":
                 if "http" in a_tag['href']:
                     link_status = get_link_status(a_tag['href'])
                     if link_status == 999:
-                        print("Bad link " + a_tag['href'] + " connection failed")
+                        print("Connection failed : " + a_tag['href'])
                     elif link_status not in [200, 503, 403]:
-                        print("Bad link " + a_tag['href'] + " returned " + str(link_status))
+                        print(str(link_status) + ": " + a_tag['href'])
