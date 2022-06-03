@@ -9,20 +9,20 @@ import markdown as md
 
 @dataclass
 class BfoUser:
-    __slots__ = ['user_name', 'description', 'user_group', 'url']
-    user_name: str
+    __slots__ = ['name', 'description', 'underneath', 'url']
+    name: str
     description: str
-    user_group: str
+    underneath: str
     url: str
 
-    def __init__(self, user_name: str, description: str, user_group: str, url: str):
-        self.user_name = user_name
+    def __init__(self, name: str, description: str, underneath: str, url: str):
+        self.name = name
         self.description = description
-        self. user_group = user_group
+        self.underneath = underneath
         self.url = url
 
     def as_dict(self):
-        return {'user_name': self.user_name, 'description': self.description, 'user_group': self.user_group, 'url': self.url}
+        return {'name': self.name, 'description': self.description, 'underneath': self.underneath, 'url': self.url}
 
 def user_list_names_groups(users: List[BfoUser]) -> Tuple[List[str], List[str]]:
     """
@@ -33,10 +33,10 @@ def user_list_names_groups(users: List[BfoUser]) -> Tuple[List[str], List[str]]:
     names = []
     groups = []
     for user in users:
-        if user.user_name not in names:
-            names += [user.user_name]
-        if user.user_group not in groups:
-            groups += [user.user_group]
+        if user.name not in names:
+            names += [user.name]
+        if user.underneath not in groups:
+            groups += [user.underneath]
     return names, groups
 
 def gen_li_tag(soup: BeautifulSoup, users: List[BfoUser]) -> Tag:
@@ -56,14 +56,14 @@ def gen_li_tag(soup: BeautifulSoup, users: List[BfoUser]) -> Tag:
         main_user, sub_users = users[0], users[1:]
     if main_user.url != "":
         a_tag = soup.new_tag("a", href=main_user.url)
-        a_tag.append(main_user.user_name)
+        a_tag.append(main_user.name)
         li_tag.append(a_tag)
         m = md.Markdown()
         # Ugly but allows tags in description to be parsed correctly
         des = str(li_tag)[:-5] + m.convert(main_user.description).replace("<p>", "").replace("</p>", "") + "</li>"
         li_tag = BeautifulSoup(des, "html.parser")
     else:
-        li_tag.append(main_user.user_name)
+        li_tag.append(main_user.name)
     if sub_users is not None:
         li_tag.append(gen_ul_tag(soup, sub_users.copy()))
     return li_tag
@@ -86,16 +86,16 @@ def gen_ul_tag(soup: BeautifulSoup, users: List[BfoUser]) -> Tag:
         for group in groups:
             if group in names:  # Check for li embedded ul
                 li_embedded_ul_names += [group]
-    users.sort(key=lambda user: user.user_name.upper())  # Alphabetize users
+    users.sort(key=lambda user: user.name.upper())  # Alphabetize users
     for li_embedded_ul_name in li_embedded_ul_names:  # Handle li embedded ul's
         li_embedded_ul_user_list: List[BfoUser] = [users[0]]  # Placeholder for first user
         main_user_i: int = 9999
         for i in range(len(users)):
             if isinstance(users[i], BfoUser):  # Catch Lists
-                if users[i].user_name == li_embedded_ul_name:  # This is the main user
+                if users[i].name == li_embedded_ul_name:  # This is the main user
                     li_embedded_ul_user_list[0] = users[i]
                     main_user_i = i  # Save position in user list
-                elif users[i].user_group == li_embedded_ul_name:  # This is a sub-user
+                elif users[i].underneath == li_embedded_ul_name:  # This is a sub-user
                     li_embedded_ul_user_list += [users[i]]
         if main_user_i != 9999:  # Make sure we found the main user
             for user in li_embedded_ul_user_list:
@@ -124,7 +124,7 @@ def parse_csv(csv_path: str) -> List[BfoUser]:
     reader = DictReader(csv_file, list(BfoUser.__slots__))
     reader.__next__()  # Throw out header
     for user_dict in reader:
-        users += [BfoUser(user_dict['user_name'], user_dict['description'], user_dict['user_group'], user_dict['url'])]
+        users += [BfoUser(user_dict['name'], user_dict['description'], user_dict['underneath'], user_dict['url'])]
     csv_file.close()
     return users
 
@@ -149,12 +149,12 @@ def gen_users_html(users: List[BfoUser], html_prologue: str, html_epilogue: str)
         soup_text += str(header)
         top_users = []
         for user in users:
-            if user.user_group == top_group:
+            if user.underneath == top_group:
                 top_users += [user]
-            elif user.user_group not in top_groups:
+            elif user.underneath not in top_groups:
                 for _user in users:
-                    if user.user_group == _user.user_name:
-                        if _user.user_group == top_group:
+                    if user.underneath == _user.name:
+                        if _user.underneath == top_group:
                             top_users += [user]
         tag = gen_ul_tag(soup, top_users)
         soup_text += str(tag)

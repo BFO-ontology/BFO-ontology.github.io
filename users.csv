@@ -1,4 +1,4 @@
-user_name,description,user_group,url
+name,description,underneath,url
 ACGT Master Ontology (ACGT MO),,Ontologies,http://bioportal.bioontology.org/ontologies/ACGT-MO
 Additive Manufacturing Ontology (AMO),,Ontologies,https://www.sciencedirect.com/science/article/pii/S0166361518301647
 Adolescent Depression Ontology (ADO),,Ontologies,https://www.jmir.org/article/viewFile/jmir_v19i7e259/2
@@ -50,8 +50,8 @@ Chemical Methods Ontology (CHMO),,Ontologies,http://obofoundry.org/ontology/chmo
 CHRONIOUS Ontology Suite,,Ontologies,http://ceur-ws.org/Vol-833/paper22.pdf
 Cigarette Smoke Exposure Ontology (CSEO),,Ontologies,http://www.jbiomedsem.com/content/pdf/2041-1480-5-31.pdf
 Clinical Data Integration Model (CDMO),,Ontologies,https://www.ncbi.nlm.nih.gov/pubmed/24954896
-Clinical Narrative Temporal Relation Ontology (CNTRO),</a>,Ontologies,https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3248753/?
-Clinical Trial Protocol Ontology (CTP-O),</a>,Ontologies,https://www.sciencedirect.com/science/article/pii/S1569190X18301114
+Clinical Narrative Temporal Relation Ontology (CNTRO),,Ontologies,https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3248753/?
+Clinical Trial Protocol Ontology (CTP-O),,Ontologies,https://www.sciencedirect.com/science/article/pii/S1569190X18301114
 Clusters of Orthologous Groups (COG) Analysis Ontology (CAO),,Ontologies,https://bioportal.bioontology.org/ontologies/CAO
 Cognition-Guided Surgery (CGS) Ontology,,Ontologies,http://archiv.ub.uni-heidelberg.de/volltextserver/22579
 Cognitive Paradigm Ontology (COGPO),,Ontologies,http://cogpo.org/
@@ -291,7 +291,7 @@ Saliva Ontology (SALO),,Ontologies,http://code.google.com/p/bodily/source/browse
 Schistosomiasis Process Ontology (IDOSCHISTO),,Ontologies,http://ceur-ws.org/Vol-1747/IP01_ICBO2016.pdf
 Scientific Evidence and Provenance Information Ontology (SEPIO),,Ontologies,http://ceur-ws.org/Vol-1747/IT605_ICBO2016.pdf
 Semantic Electronic Health Record (SEHR) Model,from [Linked2Safety](http://www.linked2safety-project.eu/) (see also [here](http://www.deri.ie/sites/default/files/publications/perakis_k_et_al_october_2013.pdf) and[here](https://link.springer.com/article/10.1007/s12553-017-0188-0)),Ontologies,http://www.linked2safety-project.eu/node/44
-Senselab Ontology,"with applications to <a href=""http://senselab.med.yale.edu/neurondb/"">NeuronDB</a> and <a href=""https://groups.google.com/forum/#!topic/bfo-discuss/q0E1J27QvtI"">BrainPharm</a>",Ontologies,http://www.ncbi.nlm.nih.gov/pubmed/20006477
+Senselab Ontology,"with applications to [NeuronDB](http://senselab.med.yale.edu/neurondb/) and [BrainPharm](https://groups.google.com/forum/#!topic/bfo-discuss/q0E1J27QvtI)",Ontologies,http://www.ncbi.nlm.nih.gov/pubmed/20006477
 Semanticscience Integrated Ontology (SIO),,Ontologies,http://code.google.com/p/semanticscience/wiki/SIO
 Semantic LAminated Composites Knowledge management System (SLACKS),,Ontologies,http://dl.acm.org/citation.cfm?id=2580238
 Sentinel: Platform for Semantic Enrichment of Social Media Streams,,Ontologies,http://ieeexplore.ieee.org/document/8232468/
@@ -369,7 +369,7 @@ Johns Hopkins University Applied Physics Lab,,"Institutions, Groups and Projects
 "Kobe University, Graduate School of Medicine, Department of Sociomedical Informatics",,"Institutions, Groups and Projects",http://www.med.kobe-u.ac.jp/
 L3 Data Tactics Corporation,(see also [here](http://ceur-ws.org/Vol-808/STIDS2011_CR_T1_SalmenEtAl.pdf)),"Institutions, Groups and Projects",https://www.data-tactics.com/
 Language and Computing,"<br/>
-Bought by <a href=""http://www.nuance.com/index.htm"">Nuance</a>","Institutions, Groups and Projects",http://www.landcglobal.com/
+Bought by [Nuance](http://www.nuance.com/index.htm)","Institutions, Groups and Projects",http://www.landcglobal.com/
 libryo,,"Institutions, Groups and Projects",https://libryo.com/
 "Medical University Graz - Institute of Medical Informatics, Statistics and Documentation",,"Institutions, Groups and Projects",http://user.medunigraz.at/stefan.schulz
 National Center for Multi-Source Information Fusion,,"Institutions, Groups and Projects",http://www.infofusion.buffalo.edu/
@@ -402,7 +402,7 @@ University of South Alabama - School of Computing - South Biomedical Informatics
 University of Texas Southwestern Medical Center,(see also [here](http://profiles.utsouthwestern.edu/profile/120432/lindsay-cowell.html)),"Institutions, Groups and Projects",http://www.utsouthwestern.edu/
 University of Washington - Structural Informatics Group (SIG),,"Institutions, Groups and Projects",http://sig.biostr.washington.edu/
 Virus Pathogen Resource (ViPR),,"Institutions, Groups and Projects",http://www.viprbrc.org/brc/home.do?decorator=vipr
-VIVO,: An interdisciplinary national network enabling collaboration and discovery between scientists across all disciplines<br>(see also [here](https://wiki.duraspace.org/display/VIVO/Source+ontologies+for+VIVO)),"Institutions, Groups and Projects",http://vivoweb.org/
+VIVO,: An interdisciplinary national network enabling collaboration and discovery between scientists across all disciplines (see also [here](https://wiki.duraspace.org/display/VIVO/Source+ontologies+for+VIVO)),"Institutions, Groups and Projects",http://vivoweb.org/
 Volley: AI-powered learning hub,,"Institutions, Groups and Projects",http://volley.com/
 Semantic Systems Engineering Ontology (SESO),,Ontologies,https://indico.esa.int/event/386/contributions/6243/attachments/4281/6391/1435%20-%20using%20semantic%20systems%20engineering%20techniques%20to%20verify%20the%20large%20aperture%20space%20telescope%20mission%20%E2%80%93%20current%20status.pdf
 Rescue Ontology (ResOnt),,Ontologies,https://www.researchgate.net/profile/Samer-Chehade-2/publication/353571839
