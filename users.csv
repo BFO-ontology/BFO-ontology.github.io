@@ -3,7 +3,7 @@ name,description,underneath,url
 (Microbial) Typing Ontology (TypOn),,Ontologies,http://www.phyloviz.net/typon
 ACGT Master Ontology (ACGT MO),,Ontologies,http://bioportal.bioontology.org/ontologies/ACGT-MO
 Actionable Intelligence Retrieval System (AIRS),,Ontologies,http://ncor.buffalo.edu/ontologies/AIRS_Ontologies.pdf
-Addiction Ontology (AO),,Ontologies,https://www.taylorfrancis.com/chapters/edit/10.4324/9781003032762-46/addiction-ontology-unify-competing-conceptualizations-addiction-robert-kelly-janna-hastings-robert-west
+Addiction Ontology (Addict-O),,Ontologies,https://onlinelibrary.wiley.com/doi/10.1111/add.16010
 Additive Manufacturing Ontology (AMO),,Ontologies,https://www.sciencedirect.com/science/article/pii/S0166361518301647
 Adolescent Depression Ontology (ADO),,Ontologies,https://www.jmir.org/article/viewFile/jmir_v19i7e259/2
 Adverse Event Reporting Ontology (AERO),,Ontologies,http://purl.obolibrary.org/obo/aero
@@ -22,6 +22,7 @@ ARIES (Arkansas Imaging Enterprise System) Knowledge Graph,,Ontologies,https://w
 Asset Management Ontology (AMODO),,Ontologies,https://www.sciencedirect.com/science/article/abs/pii/S2452414X21000947
 Autism-DSM-ADI-R Ontology (ADAR),,Ontologies,http://www.ncbi.nlm.nih.gov/pubmed/26151311
 Bacterial Clinical Infectious Diseases Ontology (BCIDO),,Ontologies,http://www.sciencedirect.com/science/article/pii/S1532046415001549
+Baden Württemberg Materials Digital Domain Ontology (BWMD),,Ontologies,https://matportal.org/ontologies/BWMD-DOMAIN
 Bank Ontology,,Ontologies,http://world-comp.org/p2011/IKE5165.pdf
 Battle Management Ontology (BMO),,Ontologies,http://link.springer.com/article/10.1007/s10489-016-0834-7
 Behavior Change Intervention Ontology (BCIO),,Ontologies,https://wellcomeopenresearch.org/articles/5-123
@@ -44,6 +45,7 @@ Cancer Chemoprevention Ontology (CanCo),,Ontologies,http://bioportal.bioontology
 Cardiovascular Disease Ontology (CVDO),,Ontologies,https://www.ebi.ac.uk/ols/ontologies/cvdo
 Case Based Reasoning (CBR) Ontology,,Ontologies,https://doi.org/10.1109/ISSE51541.2021.9582535
 Categorical Temporal Phenomenology,,Ontologies,http://www.roentgensemiotics.net/phenomenology.htm
+Causal Pathway Ontology,,Ontologies,https://www.researchprotocols.org/2022/5/e34990
 Cell Behavior Ontology (CBO),,Ontologies,http://cbo.biocomplexity.indiana.edu/
 Cell Culture Ontology (CCONT),,Ontologies,https://bioportal.bioontology.org/ontologies/CCONT
 Cell Cycle Ontology,,Ontologies,https://genomebiology.biomedcentral.com/articles/10.1186/gb-2009-10-5-r58
@@ -51,12 +53,12 @@ Cell Cycle Ontology,,Ontologies,https://genomebiology.biomedcentral.com/articles
 Cell Line Ontology (CLO),,Ontologies,http://obofoundry.org/ontology/clo.html
 Cell Ontology,: designed as a structured controlled vocabulary for cell types,Ontologies,http://obofoundry.org/ontology/cl.html
 Cellular Microscopy Phenotype Ontology (CMPO),,Ontologies,http://jbiomedsem.biomedcentral.com/articles/10.1186/s13326-016-0074-0
+Character Computing Ontology (CCOnto),,Ontologies,https://www.researchgate.net/publication/350106623_CCOnto_The_Character_Computing_Ontology
 Chemical Analysis Ontology (CAO),,Ontologies,http://champ-project.org/
 Chemical Entities of Biological Interest (ChEBI),,Ontologies,http://www.ebi.ac.uk/chebi
 Chemical Information Ontology (CHEMINF),,Ontologies,http://obofoundry.org/ontology/cheminf.html
 Chemical Methods Ontology (CHMO),,Ontologies,http://obofoundry.org/ontology/chmo.html
 CHRONIOUS Ontology Suite,,Ontologies,http://ceur-ws.org/Vol-833/paper22.pdf
-"CICCONETO et al., 2020; CICCONETO, 2021) spatial relations ontology",,Ontologies,
 CIDO-COVID-19,,Ontologies,https://ieeexplore.ieee.org/abstract/document/9629555
 Cigarette Smoke Exposure Ontology (CSEO),,Ontologies,http://www.jbiomedsem.com/content/pdf/2041-1480-5-31.pdf
 Clinical Data Integration Model (CDMO),,Ontologies,https://www.ncbi.nlm.nih.gov/pubmed/24954896
@@ -77,6 +79,7 @@ Computer Aided Engineering Modeling Language (CAEML) Ontology,,Ontologies,https:
 Computer-Based Patient Record Ontology (CPRO),,Ontologies,https://code.google.com/archive/p/cpr-ontology/
 Conceptual Model Ontology (CMO),,Ontologies,http://ceur-ws.org/Vol-833/paper25.pdf
 Core Data Integration Model (CDIM),,Ontologies,https://www.researchgate.net/publication/263323866_Clinical_Data_Integration_Model_Core_Interoperability_Ontology_for_Research_Using_Primary_Care_Data
+Core Ontology for Describing Production Equipment (OCore),,Ontologies,https://doi.org/10.3390/asi5050098
 Coriell Cell Line Ontology,,Ontologies,http://efo.sourceforge.net/coriell.htm
 Coronavirus Infectious Disease Ontology (CIDO),,Ontologies,http://www.ontobee.org/ontology/cido
 CPR Ontology for the Institute of Medicine's (IOM) Computer-Based Patient Record Ontology,,Ontologies,http://ceur-ws.org/Vol-833/paper28.pdf
@@ -90,6 +93,8 @@ Data Use Ontology (DUO),see also [here](https://doi.org/10.1016/j.xgen.2021.1000
 Decision Ontology,,Ontologies,https://doi.org/10.3390/systems6040046
 Diabetes mellitus Diagnosis Ontology (DDO),,Ontologies,http://link.springer.com/article/10.1186/s40535-016-0021-2
 Diabetes Mellitus Treatment Ontology (DMTO),,Ontologies,https://jbiomedsem.biomedcentral.com/articles/10.1186/s13326-018-0176-y
+Digital Construction Ontologies (DiCon) Suite,,Ontologies,https://digitalconstruction.github.io/v/0.5/
+Digital Engineering Framework for Integration and Interoperability (DEFII),,Ontologies,https://arxiv.org/ftp/arxiv/papers/2206/2206.10454.pdf
 Digital Objects in Philosophy Ontology (DOPHO),,Ontologies,https://publiscologne.th-koeln.de/frontdoor/deliver/index/docId/1363/file/MAT_Seidlmayer.pdf
 Document Act Ontology (D-Acts),,Ontologies,https://code.google.com/p/d-acts
 Drug Interaction Ontology (DIO),,Ontologies,http://www.ncbi.nlm.nih.gov/pubmed/15360854
@@ -97,6 +102,7 @@ Drug Ontology (DrOn),,Ontologies,http://obofoundry.org/ontology/dron.html
 Drug Repurposing Ontology (DRO),,Ontologies,https://www.researchgate.net/profile/Werner_Ceusters/publication/335079148_Foundations_for_a_Realism-based_Drug_Repurposing_Ontology/links/5d4d7ce44585153e5948eb68/Foundations-for-a-Realism-based-Drug-Repurposing-Ontology.pdf
 Drug-drug Interaction Evidence Ontology (DIDEO),,Ontologies,http://obofoundry.org/ontology/dideo.html
 Drug-drug Interaction Ontology (DINTO),,Ontologies,http://www.obofoundry.org/ontology/dinto.html
+E-Cigarette Ontology (E-CigO),,Ontologies,https://doi.org/10.1111/add.16010
 Eagle-I Research Resource Ontology (ERO),,Ontologies,https://open.med.harvard.edu/wiki/display/eaglei/Ontology
 EifcOWL (Enhanced Ontology for the Construction Industry Foundation Classes),see also [here](http://basic-formal-ontology.org/content.iospress.com/articles/applied-ontology/ao210254) ,Ontologies,https://content.iospress.com/articles/applied-ontology/ao210254
 Electrocardiography Ontology (ECG),,Ontologies,http://www.j-biomed-inform.com/article/S1532-0464(10)00118-8/abstract
@@ -135,16 +141,22 @@ Gastrointestinal Endoscopy Ontology (GIEO),,Ontologies,http://ceur-ws.org/Vol-83
 Gene Ontology (GO),,Ontologies,http://obofoundry.org/ontology/go.html
 Gene Regulation Ontology (GRO),,Ontologies,https://ub-madoc.bib.uni-mannheim.de/35191/1/dissertation_beisswanger.pdf
 General Information Model (GIM),,Ontologies,http://jamia.bmj.com/content/20/5/986.full
+GENIAL! Basic Ontology (GBO),,Ontologies,https://github.com/wawrzik/GENIALOntologies
 Genomic Epidemiology Ontology (GenEpiO),,Ontologies,http://obofoundry.org/ontology/genepio.html
 Genomic Feature and Variation Ontology (GFVO),,Ontologies,https://peerj.com/articles/933/
+Genomics Integrated Biobanking Ontology (GIBO),,Ontologies,https://github.com/Nits11/GIBO
 GeoCore Geology Ontology,see also [here](https://doi.org/10.1016/j.cageo.2019.104387) ,Ontologies,https://www.lume.ufrgs.br/bitstream/handle/10183/225741/001129935.pdf
 Geographical Entity Ontology (GEO),,Ontologies,http://www.obofoundry.org/ontology/geo.html
+Geological Spatial Relations Ontology,,Ontologies,https://github.com/BDI-UFRGS/GeologicalSpatialRelationsOntology
 GeoReservoir Ontology,,Ontologies,https://doi.org/10.1016/j.cageo.2021.105005
 GeoReservoir ontology for deep-marine depositional system geometry,,Ontologies,https://www.sciencedirect.com/science/article/pii/S0098300421002880
+GeoSPARQL,,Ontologies,https://opengeospatial.github.io/ogc-geosparql/geosparql11/spec.pdf
 Gestalt,: Federated Access to Cyber Observables for Detection of Targeted Attack,Ontologies,https://ieeexplore.ieee.org/abstract/document/6956738
 Global Electronic Health Record Ontology (G-EHR-O),,Ontologies,https://www.sciencedirect.com/science/article/pii/S1569190X18301114
+Glyco-Enzyme Pathway and Molecular Function Ontology (GlycoEnzOnto),,Ontologies,https://www.ncbi.nlm.nih.gov/pmc/articles/PMC9750110/
 "Graphs, Objects, Points, Properties, Roles, and Relationships Ontology (GOPPRRE)",with extensions,Ontologies,https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=9534721
 Health Data Ontology Trunk (HDOT),,Ontologies,http://purl.org/hdot
+Healthy City (HC) Ontology,,Ontologies,https://doi.org/10.3390/su132413844
 Hemocomponents and Hemoderivatives Ontology (HEMONTO),,Ontologies,http://mba.eci.ufmg.br/downloads/ontobras-2013_paper1.pdf
 HERMES 4D Printing Ontology,,Ontologies,https://www.sciencedirect.com/science/article/pii/S0264127521007486
 Host Pathogen Interactions Ontology (HPO),,Ontologies,http://bioportal.bioontology.org/ontologies/HPIO?p=classes
@@ -153,11 +165,13 @@ Human Disease Ontology (DOID),,Ontologies,http://www.obofoundry.org/ontology/doi
 Human Experience Realist Ontology (HERO),,Ontologies,https://www.researchgate.net/publication/316557588_A_Human_Experience_Realist_Ontology_in_Basic_Formal_Ontology
 Human Interaction Network Ontology (HINO),,Ontologies,http://arxiv.org/pdf/1311.3355.pdf
 Human Physiology Simulation Ontology (HuPSON),(see also [here](http://www.ncbi.nlm.nih.gov/pmc/articles/PMC4177144/)  ),Ontologies,http://www.jbiomedsem.com/content/pdf/2041-1480-4-35.pdf
+Industrial Ontologies Foundry (IOF) Core Ontology,,Ontologies,http://ceur-ws.org/Vol-3240/paper3.pdf
 Infectious Disease Ontology,,Ontologies,http://obofoundry.org/ontology/ido.html
 Information Artifact Ontology (IAO),,Ontologies,http://obofoundry.org/ontology/iao.html
 Information Security Domain (ISD) ontology,,Ontologies,https://ieeexplore.ieee.org/abstract/document/8795392
 Informed Consent Ontology (ICO),,Ontologies,http://ceur-ws.org/Vol-2285/ICBO_2018_paper_59.pdf
 Innovative Capabilities of Additive Manufacturing (ICAM) Ontology,,Ontologies,http://computingengineering.asmedigitalcollection.asme.org/article.aspx?articleid=2674329
+Integrative and Conjugative Element Ontology (ICEO),,Ontologies,https://doi.org/10.1038/s41597-021-01112-5
 Integrated Framework for Additively Manufactured Products (IFAMP) ontology,,Ontologies,https://buffalo.app.box.com/v/integrating-ontologies
 Interaction Network Ontology (INO),,Ontologies,http://www.cmpe.boun.edu.tr/~ozgur/papers/VDOS2014.pdf
 Interdisciplinary Prostate Ontology Project (IPOP),,Ontologies,http://ipop.ontodev.com/
@@ -165,9 +179,11 @@ Interdisciplinary Prostate Ontology Project (IPOP),,Ontologies,http://ipop.ontod
 Interoperative Neuromonitoring Ontology (IOM),,Ontologies,https://pubmed.ncbi.nlm.nih.gov/35062118/
 Intervention Setting Ontology,,Ontologies,https://wellcomeopenresearch.org/articles/5-124
 Intracranial Aneurysm (ICA) Ontology,,Ontologies,http://www.sciencedirect.com/science/article/pii/S1532046415000519
+Intraoperative Neurophysiological Monitoring Document Ontology (IOMDO),,Ontologies,https://www.researchsquare.com/article/rs-2026582/v1
 Iranian Traditional Medicine General Ontology (IrGO),,Ontologies,https://jbiomedsem.biomedcentral.com/articles/10.1186/s13326-021-00237-1
 Knowledge Base Of Biomedicine (KaBOB),,Ontologies,http://www.biomedcentral.com/content/pdf/s12859-015-0559-3.pdf
 Knowledge Object Reference Ontology (KORO),,Ontologies,https://onlinelibrary.wiley.com/doi/full/10.1002/lrh2.10054
+Laser Powder Bed Fusion Ontology (LPBFO),,Ontologies,https://matportal.org/ontologies/LPBFO
 Library of Integrated Network-based Cellular Signatures,,Ontologies,https://bmcbioinformatics.biomedcentral.com/articles/10.1186/s12859-017-1981-5
 Lipid Ontology,,Ontologies,http://obofoundry.org/ontology/lipro.html
 Literary Theme Ontology (LTO),,Ontologies,https://www.researchgate.net/publication/332832296_The_Literary_Theme_Ontology_for_Media_Annotation_and_Information_Retrieval
@@ -177,6 +193,7 @@ Major histocompatibility complex (MHC) Restriction Ontology (MRO),,Ontologies,ht
 Malaria Ontology (IDOMAL),,Ontologies,http://obofoundry.org/ontology/idomal.html
 Manufacturing Service Description Language (MSDL) ontology,,Ontologies,https://link.springer.com/chapter/10.1007/978-3-319-99707-0_40
 Manufacturing Supply Chain Ontology (MSCO),,Ontologies,https://buffalo.box.com/s/rbapg73v4jq18dvw0rf2jnszndvnxmb0
+Material Science and Engineering Ontology (MSEO),,Ontologies,https://matportal.org/ontologies/MSEO
 Medication Adherence Behavior Ontology (MAB-Ontology),,Ontologies,https://scholarworks.iupui.edu/bitstream/handle/1805/17767/Sawesi_iupui_0104D_10326.pdf
 Mental Disease Ontology (MFO-MD),,Ontologies,http://obofoundry.org/ontology/mfomd.html
 Mental Functioning Ontology (MF),,Ontologies,http://obofoundry.org/ontology/mf.html
@@ -191,9 +208,10 @@ Mission and Means Framework (MMF) Ontology,,Ontologies,https://ieeexplore.ieee.o
 MOCA (Multi-attribute Ontology-based Criticality Analysis),,Ontologies,https://link.springer.com/article/10.1007/s43684-022-00021-7
 Modal Relation Ontology (MRO),,Ontologies,https://www.spiedigitallibrary.org/conference-proceedings-of-spie/10635/106350H/Problems-with-prescriptions--disentangling-data-about-actual-versus-prescribed/10.1117/12.2307718.short?SSO=1
 Mode of Delivery (MoD) Ontology,,Ontologies,https://wellcomeopenresearch.org/articles/5-125
+Model Card Report Ontology (MCRO),,Ontologies,https://doi.org/10.1186/s12859-022-04797-6
 Model for Clinical Information (MCI),,Ontologies,http://bmcmedinformdecismak.biomedcentral.com/articles/10.1186/s12911-016-0248-9
 Model for Describing Insect Anatomical Structures (MoDIAS),,Ontologies,https://www.preprints.org/manuscript/202201.0254/v1
-Modular Environmental Modeling Ontology (MEMOn),,Ontologies,https://ieeexplore-ieee-org.gate.lib.buffalo.edu/abstract/document/8599597
+Modular Environmental Modeling Ontology (MEMOn),,Ontologies,https://linkinghub.elsevier.com/retrieve/pii/S1364815218301221
 Mouse Pathology Ontology (MPATH),,Ontologies,http://obofoundry.org/ontology/mpath.html
 Name Reaction Ontology (RXNO),,Ontologies,http://obofoundry.org/ontology/rxno.html
 Nanoparticle Ontology (NPO),: Ontology for Cancer Nanotechnology Research,Ontologies,http://www.ncbi.nlm.nih.gov/pubmed/20211274
@@ -225,6 +243,7 @@ Ontology for Cancer research variables (OCRV),,Ontologies,https://bmcmedinformde
 Ontology for Computable Eligibility Criteria - Hepatitis C Virus (OCEC-HCV),,Ontologies,https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6371316/
 Ontology for Dengue Fever (IDODEN),,Ontologies,http://journals.plos.org/plosntds/article?id=10.1371/journal.pntd.0003479
 Ontology for Documentation of Variable/Data Source Selection (ODVDS),,Ontologies,http://ceur-ws.org/Vol-2427/SEPDA_2019_paper_15.pdf
+Ontology for the Documentation of Variable Selection and Data source Selection and Integration (OD-ATTEST),,Ontologies,https://bmcmedinformdecismak.biomedcentral.com/articles/10.1186/s12911-020-01270-3
 Ontology for Drug Discovery Investigations (DDI),,Ontologies,https://code.google.com/archive/p/ddi-ontology/
 Ontology for Energy Investigations (OEI),,Ontologies,https://www.researchgate.net/publication/234128482_Facilitating_Knowledge_Sharing_and_Analysis_in_Energy_Informatics_with_the_Ontology_for_Energy_Investigations_%28OEI%29
 Ontology for Functionally Graded Materials (OFGM),,Ontologies,https://www.academia.edu/27922525/Development_of_a_Manufacturing_Ontology_for_Functionally_Graded_Materials
@@ -246,12 +265,11 @@ Ontology for Stem Cell Investigations (OSCI),,Ontologies,https://bmcbioinformati
 Ontology for Thoracentesis,,Ontologies,https://www.sciencedirect.com/science/article/pii/S0933365717301525
 Ontology of Arthropod Circulatory Systems (OArCS),,Ontologies,http://obofoundry.org/ontology/oarcs.html
 Ontology of Biological and Clinical Statistics (OBCS),,Ontologies,http://obofoundry.org/ontology/obcs.html
-Ontology of Cancer Related Socialecological Variables (OCRSEV),,Ontologies,http://ceur-ws.org/Vol-2137/ws_ONCONTO_paper_3.pdf
-Ontology of Card Sleights,,Ontologies,https://arxiv.org/abs/1903.08523
+Ontology of Cancer Related Social-Ecological Variables (OCRSEV),,Ontologies,http://ceur-ws.org/Vol-2137/ws_ONCONTO_paper_3.pdf
 Ontology of Card Sleights,,Ontologies,https://arxiv.org/abs/1903.08523
 Ontology of Cardiovascular Drug Adverse Events (OCVDAE),,Ontologies,https://www.nature.com/articles/s41598-017-12580-4
 Ontology of Chinese Medicine for Rheumatism (OCMR),,Ontologies,https://bioportal.bioontology.org/ontologies/OCMR
-Ontology of Clinical Research (OCRe),,Ontologies,https://code.google.com/archive/p/ontology-of-clinical-research/
+Ontology of Clinical Research (OCRe),,Ontologies,https://ce.google.com/archive/p/ontology-of-clinical-research/
 Ontology of Commercial Exchange (OCE),,Ontologies,https://philarchive.org/archive/MERCCC
 Ontology of Data Mining (OntoDM),,Ontologies,https://doi.org/10.1109/ICDMW.2008.62
 Ontology of Datatypes (OntoDT),,Ontologies,https://www.sciencedirect.com/science/article/pii/S0020025515005800
@@ -264,7 +282,8 @@ Ontology of Hemotherapy (HEMONTO),,Ontologies,https://1library.net/document/q594
 Ontology of Medical Microbiology (OntoMic),,Ontologies,http://rali.iro.umontreal.ca/rali/sites/default/files/publis/Levreault-MSc.pdf
 Ontology of Medically Related Social Entities (OMRSE),,Ontologies,http://obofoundry.org/ontology/omrse.html
 Ontology of Microbial Phenotypes (OMP),,Ontologies,http://obofoundry.org/ontology/omp.html
-Ontology of Organizational Structures ofTrauma systems and Trauma centers (OOSTT),,Ontologies,http://ceur-ws.org/Vol-1747/IT504_ICBO2016.pdf
+Ontology of Organizational Structures of Trauma systems and Trauma centers (OOSTT),,Ontologies,http://ceur-ws.org/Vol-1747/IT504_ICBO2016.pdf
+Ontology of Phenomenological Psychopathology (OPheP),,Ontologies,https://doi.org/10.1016/S2215-0366(22)00156-0
 Ontology of Social Participation (OPS),,Ontologies,http://arxiv.org/pdf/1501.02662.pdf
 Ontology of Systems Engineering,,Ontologies,https://www.sciencedirect.com/science/article/pii/S1877050919307380
 Ontology of Vaccine Adverse Events (OVAE),,Ontologies,http://obofoundry.org/ontology/ovae.html
@@ -276,12 +295,15 @@ Open Model-Based Engineering Environment (OpenMBEE),,Ontologies,https://link.spr
 Operational Environment Ontology (OEO),,Ontologies,https://jsou.libguides.com/ld.php?content_id=37534351
 Oral Health and Disease Ontology (OHD),,Ontologies,http://obofoundry.org/ontology/ohd.html
 Organization Ontology Based on ROR,,Ontologies,https://figshare.com/articles/presentation/An_Organization_Ontology_based_on_ROR/14839359
+ORMA+ Ontology for Reliability Centered Maintenance,,Ontologies,https://www.politesi.polimi.it/bitstream/10589/195722/3/2022_10_Ghedini.pdf
 Parasite Experiment Ontology (PEO),,Ontologies,http://bioportal.bioontology.org/ontologies/1335
 Part-Focused Manufacturing Process Ontology (PMPO),,Ontologies,https://www.tandfonline.com/doi/abs/10.1080/0951192X.2017.1357837
 Patient Safetry Categorial Structure (PS-CAST),,Ontologies,http://person.hst.aau.dk/ska/MIE2015/Papers/SHTI210-0160.pdf
+Performance Summary Display Ontology (PSDO),,Ontologies,https://github.com/Display-Lab/psdo
 Petrochemical Ontology,,Ontologies,http://books.google.com/books?id=XYOBAusxPCcC&pg=PA27&lpg=PA27&dq=bfo+ontology&source=bl&ots=4nFYXvfaMy&sig=xq4BZAmY8DH0J5DMj3DE_xB4Fes&hl=en&ei=ZFpjStvADMaltgem27SyAg&sa=X&oi=book_result&ct=result&resnum=2
 PGxO Pharmacogenomics Ontology,,Ontologies,https://www.biorxiv.org/content/biorxiv/early/2018/08/13/390971.full.pdf
 Phenotypic Quality Ontology (PaTO),: qualities of biomedical entities,Ontologies,http://obofoundry.org/ontology/pato.html
+Photovoltaic Ontology (PVO),,Ontologies,https://doi.org/10.1109/SEGE55279.2022.9889768
 Physics-Based Simulation Ontology (PSO-Physics and PSO-Sim),,Ontologies,https://www.tandfonline.com/doi/abs/10.1080/09544828.2019.1644301?journalCode=cjen20
 Plant Experimental Assay Ontology (PEAO),,Ontologies,http://bioportal.bioontology.org/ontologies/PEAO
 Plant Ontology (PO),,Ontologies,http://obofoundry.org/ontology/po.html
@@ -299,7 +321,7 @@ Prescription of Drugs Ontology (PRDO),,Ontologies,https://pdfs.semanticscholar.o
 PRISM: A Platform for Imaging inPrecision Medicine,,Ontologies,https://ascopubs.org/doi/pdfdirect/10.1200/CCI.20.00001
 Process and Observation Ontology (PO2),,Ontologies,https://www.sciencedirect.com/science/article/abs/pii/S0958694619300032
 Product Life Cycle Ontology for Additive Manufacturing,,Ontologies,https://www.sciencedirect.com/science/article/pii/S0166361518301647
-Product Service System (PSS) Ontology,,Ontologies,https://www.researchgate.net/publication/225965099
+Product Service System (PSS) Ontology,,Ontologies,https://www.sciencedirect.com/science/article/abs/pii/S0166361522001269?via%3Dihub
 Proper Name Ontology (PNO),,Ontologies,https://code.google.com/p/proper-name-ontology
 PROSPECT-IDR: Personalised Prediction of Infectious Disease Risk,,Ontologies,http://www.tara.tcd.ie/bitstream/handle/2262/86059/Final%20Version.pdf?sequence=1
 Protein Ontology (PRO),: protein types and modifications classified on the basis of evolutionary relationships,Ontologies,http://obofoundry.org/ontology/pr.html
@@ -308,6 +330,8 @@ Provenir ontology for provenance modeling,,Ontologies,https://corescholar.librar
 Public Safety and Emergency Management (PS/EM) Communications Ontology,,Ontologies,https://www.ida.org/-/media/feature/publications/p/pu/public-safety-and-emergency-management-communications-ontology/d-8583.ashx
 QROWD urban traffic and mobility ontology,,Ontologies,https://ec.europa.eu/research/participants/documents/downloadPublic?documentIds=080166e5c077764d&appId=PPGMS
 Quality of Service (QoS) Ontology,,Ontologies,https://www.researchgate.net/publication/259759470
+Rare-Earth Elements (REE) Mineral System ontology,,Ontologies,https://doi.org/10.1130/2022.2558(03)
+Reference Ontology for FISH (FAIR in vivo data Sharing platform),,Ontologies,http://ceur-ws.org/Vol-3235/paper25.pdf
 Relations Ontology (RO),,Ontologies,http://www.obofoundry.org/ontology/ro.html
 Reliability Assessment for Assembly Stations (RAAS) Ontology,,Ontologies,https://infoscience.epfl.ch/record/265908/files/
 Rescue Ontology (ResOnt),,Ontologies,https://www.researchgate.net/profile/Samer-Chehade-2/publication/353571839
@@ -319,13 +343,14 @@ ROMAIN industrial maintenance ontology,,Ontologies,https://www.researchgate.net/
 Saliva Ontology (SALO),,Ontologies,https://bmcbioinformatics.biomedcentral.com/articles/10.1186/1471-2105-11-302
 Schistosomiasis Process Ontology (IDOSCHISTO),,Ontologies,http://ceur-ws.org/Vol-1747/IP01_ICBO2016.pdf
 Scientific Evidence and Provenance Information Ontology (SEPIO),,Ontologies,http://ceur-ws.org/Vol-1747/IT605_ICBO2016.pdf
+Sefaria Topics,,Ontologies,https://github.com/Sefaria/Sefaria-Project/wiki/Documentation-for-Topics-Hierarchy
 Semantic Electronic Health Record (SEHR) Model,from [Linked2Safety](http://www.linked2safety-project.eu/)  (see also [here](https://link.springer.com/article/10.1007/s12553-017-0188-0)  ),Ontologies,http://www.linked2safety-project.eu/node/44
 Semantic LAminated Composites Knowledge management System (SLACKS),,Ontologies,http://dl.acm.org/citation.cfm?id=2580238
 Semantic Reference Model for Individualization of Information Processes,,Ontologies,https://www.mdpi.com/2079-9292/10/20/2523
 Semantic Systems Engineering Ontology (SESO),,Ontologies,https://indico.esa.int/event/386/contributions/6243/attachments/4281/6391/1435%20-%20using%20semantic%20systems%20engineering%20techniques%20to%20verify%20the%20large%20aperture%20space%20telescope%20mission%20%E2%80%93%20current%20status.pdf
 Semanticscience Integrated Ontology (SIO),,Ontologies,https://jbiomedsem.biomedcentral.com/articles/10.1186/2041-1480-5-14
 Senselab Ontology,with applications to [NeuronDB](http://senselab.med.yale.edu/neurondb/)  and [BrainPharm](https://groups.google.com/forum/#!topic/bfo-discuss/q0E1J27QvtI) ,Ontologies,http://www.ncbi.nlm.nih.gov/pubmed/20006477
-Sentinel: Platform for Semantic Enrichment of Social Media Streams,,Ontologies,http://ieeexplore.ieee.org/document/8232468/
+Sentinel: Platform for Semantic Enrichment of Media Streams,,Ontologies,http://ieeexplore.ieee.org/document/8232468/
 Sequence Ontology (SO),: features and properties of nucleic sequences,Ontologies,http://obofoundry.org/ontology/so.html
 Shop-Floor Digital Twin (DT) ontology,,Ontologies,http://ceur-ws.org/Vol-2615/paper5.pdf
 Situated and Interactive Multimodal Conversations,,Ontologies,https://arxiv.org/pdf/2006.01460.pdf
@@ -339,6 +364,7 @@ SNOMED CT (SCT) Standard Ontology,,Ontologies,https://bmcmedinformdecismak.biome
 Social Psychology Ontology (SPO),,Ontologies,https://ubir.buffalo.edu/xmlui/handle/10477/79440
 Software Ontology (SWO),,Ontologies,http://jbiomedsem.biomedcentral.com/articles/10.1186/2041-1480-5-25
 "Software, Disabilities and Competences Ontology (SODIC)",,Ontologies,http://dspace.ucuenca.edu.ec/bitstream/123456789/28548/1/Trabajo%20de%20Titulaci%C3%B3n.pdf
+Soil Food Web Ontology,,Ontologies,https://www.biorxiv.org/content/10.1101/2023.02.03.526812v1.full.pdf
 Space Domain Ontologies (SDO),,Ontologies,https://philpapers.org/rec/COXTSD-2
 Space Object Ontology (SOO),,Ontologies,https://ieeexplore.ieee.org/document/7527882
 Spatial Graph Adapter (SGA) Ontology Design Pattern,,Ontologies,http://www.semantic-web-journal.net/system/files/swj1582.pdf
@@ -352,6 +378,8 @@ Suggested Ontology for Pharmacogenomics (SO-Pharm),,Ontologies,http://obofoundry
 Supply Chain Traceability Ontology,,Ontologies,https://asmedigitalcollection.asme.org/computingengineering/article-abstract/22/5/051002/1139465/Enabling-Traceability-in-Agri-Food-Supply-Chains
 Surface Water Ontology (SWO),,Ontologies,https://www.usgs.gov/media/files/surface-water-ontology
 Survey Ontology,,Ontologies,https://www.scitepress.org/papers/2017/65827/65827.pdf
+Sustainable Development and Climate (SDC) Ontology,,Ontologies,https://github.com/hbabaie1/Sustainable-Development-and-Climate-SDC-ontology
+Symptomatic Treatment of Multiple Sclerosis Ontology (STMSO),,Ontologies,https://e-hir.org/upload/pdf/hir-2022-28-4-332.pdf
 Taxonomy for Rehabilitation of Knee Conditions (TRAK),,Ontologies,http://users.cs.cf.ac.uk/I.Spasic/trak
 The Common Rule Ontology (CRO),,Ontologies,https://github.com/CRO-ontology/CRO
 The Trope Ontology,,Ontologies,https://www.mdpi.com/2409-9287/4/3/40
@@ -369,6 +397,7 @@ Universal Core Semantic Layer,,Ontologies,http://sunsite.informatik.rwth-aachen.
 Vaccination Informed Consent Ontology (VICO),,Ontologies,http://jbiomedsem.biomedcentral.com/articles/10.1186/s13326-016-0062-4
 Vaccine Ontology (VO),,Ontologies,http://obofoundry.org/ontology/vo.html
 Value Stream Mapping (VSM) Ontology,,Ontologies,https://era.library.ualberta.ca/items/5ad997be-0f3d-4456-8108-b3c69d851a98/view/060e801a-92a5-44ac-ba8a-0a00ab22765e/Abdelghani_Mohammad_202101_PhD.pdf
+Visual Inspection Ontology (VIO),,Ontologies,https://data.uni-hannover.de/dataset/visual-inspection-ontology
 Visualized Emotion Ontology (VEO),,Ontologies,https://bmcmedinformdecismak.biomedcentral.com/articles/10.1186/s12911-018-0634-6
 Vital Sign Ontology (VSO),,Ontologies,http://ontology.buffalo.edu/smith/articles/Vital_Sign_Ontology.pdf
 VIVO Ontology,,Ontologies,https://openreview.net/forum?id=SkgyVa-coV
@@ -410,6 +439,7 @@ Elsevier Smart Content Strategy,,"Institutions, Groups and Projects",http://www.
 eNanoMapper,,"Institutions, Groups and Projects",http://www.enanomapper.net/
 EuPath Ontology,,"Institutions, Groups and Projects",https://bioportal.bioontology.org/ontologies/EUPATH/?p=summary
 Extensible Neuroimaging Archive Toolkit (XNAT),,"Institutions, Groups and Projects",http://www.aifb.kit.edu/images/e/e5/Sfb-infrastructure-spie2016.pdf
+Department of Defence and Intelligence Community Ontology Working Group (DIOWG),,"Institutions, Groups and Projects,
 Good Ontology Design (GoodOD),,"Institutions, Groups and Projects",https://doi.org/10.1371/journal.pone.0104463
 HIGHFLEET,,"Institutions, Groups and Projects",http://www.highfleet.com/
 Influenza Research Database (IRD),,"Institutions, Groups and Projects",http://www.fludb.org/brc/home.spg?decorator=influenza
@@ -423,6 +453,7 @@ Language and Computing,   Bought by [Nuance](http://www.nuance.com/index.htm) ,"
 libryo,,"Institutions, Groups and Projects",https://libryo.com/
 "Medical University Graz - Institute of Medical Informatics, Statistics and Documentation",,"Institutions, Groups and Projects",http://user.medunigraz.at/stefan.schulz
 National Center for Multi-Source Information Fusion,,"Institutions, Groups and Projects",http://www.infofusion.buffalo.edu/
+National Geospatial-Intelligence Agency (NGA),,"Institutions, Groups and Prjects",https://www.nga.mil/
 OntoCAT,,"Institutions, Groups and Projects",http://www.ontocat.org/
 OntoCOG,,"Institutions, Groups and Projects",http://ontobat.hegroup.org/
 Open Access Journals Integrated service System Project (GoOA),,"Institutions, Groups and Projects",http://bioportal.bioontology.org/projects/PDOLAS
@@ -436,6 +467,8 @@ Saitama University - Faculty of Liberal Arts,(see also [here](http://www.kyy.sai
 Science Applications International Corporation (SAIC),,"Institutions, Groups and Projects",https://www.saic.com/
 Science Commons,,"Institutions, Groups and Projects",http://www.sciencecommons.org/
 Neurocommons,,Science Commons,http://www.sciencecommons.org/projects/data/
+Raytheon Technologies,,"Institutions, Groups and Projects",https://www.rtx.com/who-we-are/what-we-do/flight
+Raytheon Technologies,,"Institutions, Groups and Projects",https://www.roche.com/
 Securboration,,"Institutions, Groups and Projects",http://www.securboration.com/
 Skeletome,,"Institutions, Groups and Projects",https://link.springer.com/content/pdf/10.1007/978-3-642-35173-0_6.pdf
 SMART Protocols,,"Institutions, Groups and Projects",http://www.swat4ls.org/wp-content/uploads/2015/10/SWAT4LS_2015_paper_15.pdf
