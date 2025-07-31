@@ -1,0 +1,13 @@
+{
+  "type": "mdx",
+  "permalink": "/tutorials",
+  "source": "@site/src/pages/tutorials.md",
+  "title": "Tutorials",
+  "description": "Video tutorials on Basic Formal Ontology",
+  "frontMatter": {
+    "title": "Tutorials",
+    "description": "Video tutorials on Basic Formal Ontology",
+    "slug": "/tutorials"
+  },
+  "unlisted": false
+}
