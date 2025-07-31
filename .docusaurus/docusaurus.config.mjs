@@ -54,6 +54,31 @@ export default {
           "href": "https://github.com/BFO-ontology/BFO-ontology.github.io",
           "label": "GitHub",
           "position": "right"
+        },
+        {
+          "to": "/fol",
+          "label": "FOL",
+          "position": "left"
+        },
+        {
+          "to": "/publications",
+          "label": "Publications",
+          "position": "left"
+        },
+        {
+          "to": "/users",
+          "label": "Users",
+          "position": "left"
+        },
+        {
+          "to": "/tutorials",
+          "label": "Tutorials",
+          "position": "left"
+        },
+        {
+          "to": "/workshops",
+          "label": "Workshops",
+          "position": "left"
         }
       ],
       "hideOnScroll": false

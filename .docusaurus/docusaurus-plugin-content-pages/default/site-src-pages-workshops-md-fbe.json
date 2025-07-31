@@ -1,0 +1,13 @@
+{
+  "type": "mdx",
+  "permalink": "/workshops",
+  "source": "@site/src/pages/workshops.md",
+  "title": "Workshops",
+  "description": "Past and upcoming BFO workshops and training materials",
+  "frontMatter": {
+    "title": "Workshops",
+    "description": "Past and upcoming BFO workshops and training materials",
+    "slug": "/workshops"
+  },
+  "unlisted": false
+}

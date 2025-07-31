@@ -49,7 +49,12 @@ const config = {
           label: 'GitHub',
           position: 'right',
         },
-        { to: '/docs/publications', label: 'Publications', position: 'left' },
+       { to: '/fol', label: 'FOL', position: 'left' },
+{ to: '/publications', label: 'Publications', position: 'left' },
+        { to: '/users', label: 'Users', position: 'left' },
+        { to: '/tutorials', label: 'Tutorials', position: 'left' },
+        { to: '/workshops', label: 'Workshops', position: 'left' },
+
       ],
     },
     footer: {

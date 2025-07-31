@@ -38,27 +38,47 @@ export default [
     exact: true
   },
   {
+    path: '/fol',
+    component: ComponentCreator('/fol', '524'),
+    exact: true
+  },
+  {
+    path: '/publications',
+    component: ComponentCreator('/publications', '671'),
+    exact: true
+  },
+  {
+    path: '/tutorials',
+    component: ComponentCreator('/tutorials', '70c'),
+    exact: true
+  },
+  {
+    path: '/users',
+    component: ComponentCreator('/users', 'a69'),
+    exact: true
+  },
+  {
+    path: '/workshops',
+    component: ComponentCreator('/workshops', '59d'),
+    exact: true
+  },
+  {
     path: '/docs',
-    component: ComponentCreator('/docs', '093'),
+    component: ComponentCreator('/docs', 'c0d'),
     routes: [
       {
         path: '/docs',
-        component: ComponentCreator('/docs', '50c'),
+        component: ComponentCreator('/docs', '35b'),
         routes: [
           {
             path: '/docs',
-            component: ComponentCreator('/docs', '8ce'),
+            component: ComponentCreator('/docs', '549'),
             routes: [
               {
                 path: '/docs/intro',
                 component: ComponentCreator('/docs/intro', 'a6e'),
                 exact: true,
                 sidebar: "docs"
-              },
-              {
-                path: '/docs/publications',
-                component: ComponentCreator('/docs/publications', '677'),
-                exact: true
               }
             ]
           }

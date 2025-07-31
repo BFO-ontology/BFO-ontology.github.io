@@ -1,7 +1,7 @@
 ---
-id: publications
 title: Publications
-sidebar_label: Publications
+description: Articles, presentations, and technical reports related to BFO.
+slug: /publications
 ---
 
 # Publications

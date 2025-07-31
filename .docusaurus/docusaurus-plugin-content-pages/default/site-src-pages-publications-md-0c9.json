@@ -1,0 +1,13 @@
+{
+  "type": "mdx",
+  "permalink": "/publications",
+  "source": "@site/src/pages/publications.md",
+  "title": "Publications",
+  "description": "Articles, presentations, and technical reports related to BFO.",
+  "frontMatter": {
+    "title": "Publications",
+    "description": "Articles, presentations, and technical reports related to BFO.",
+    "slug": "/publications"
+  },
+  "unlisted": false
+}

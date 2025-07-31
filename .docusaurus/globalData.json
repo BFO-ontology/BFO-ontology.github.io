@@ -14,10 +14,6 @@
               "id": "intro",
               "path": "/docs/intro",
               "sidebar": "docs"
-            },
-            {
-              "id": "publications",
-              "path": "/docs/publications"
             }
           ],
           "draftIds": [],
