@@ -1,0 +1,13 @@
+{
+  "type": "mdx",
+  "permalink": "/fol",
+  "source": "@site/src/pages/fol.md",
+  "title": "First-Order Logic Based Implementation",
+  "description": "Explanation of the first-order logic (FOL) implementation of BFO.",
+  "frontMatter": {
+    "title": "First-Order Logic Based Implementation",
+    "description": "Explanation of the first-order logic (FOL) implementation of BFO.",
+    "slug": "/fol"
+  },
+  "unlisted": false
+}
