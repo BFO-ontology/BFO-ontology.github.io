@@ -1,4 +1,182 @@
-/* Custom styles for the BFO site */
+/* ------------------------------
+   Base styles
+   ------------------------------ */
+
+/* Base font settings */
 body {
-  /* placeholder rule to satisfy import */
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
+    Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+/* Logo sizing and alignment */
+.navbar__logo img {
+  max-height: 90px;
+  height: auto !important;
+  width: auto !important;
+  vertical-align: middle;
+  margin-top: -30px; /* Your preferred placement */
+  margin-bottom: -10px;
+}
+
+/* Align title text */
+.navbar__title {
+  line-height: 1;
+  padding-top: 5px;
+}
+
+/* Make navbar taller for large logo and set background */
+.navbar {
+  background-color: #F5F1EA !important;
+  min-height: 110px;
+  align-items: center;
+}
+
+/* 🎨 BFO color theme */
+:root {
+  --ifm-color-primary: #1F2F46;         /* Navy Blue for text */
+  --ifm-font-color-base: #1F2F46;
+
+  --ifm-background-color: #F5F1EA;      /* Beige background */
+
+  --ifm-link-color: #4B5563;
+  --ifm-link-hover-color: #2E353D;
+
+  --ifm-navbar-link-color: #4B5563;
+  --ifm-navbar-link-hover-color: #2E353D;
+}
+
+/* Global link styling */
+a {
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.navbar__link {
+  font-weight: bold;
+}
+
+/* Gold Ochre primary buttons */
+.button--primary {
+  background-color: #C4932D;
+  color: #fff;
+  border: none;
+}
+
+.button--primary:hover {
+  background-color: #b47e1a;
+}
+
+/* Footer style */
+.footer {
+  background-color: #1F2F46;
+  color: #FFFFFF;
+}
+
+/* ------------------------------
+   Homepage specific styles
+   ------------------------------ */
+body.page-index a {
+  font-weight: bold;
+  text-decoration: none;
+}
+
+body.page-index a:hover {
+  text-decoration: underline;
+}
+
+/* Make specific homepage links bold and remove underline */
+body.page-index a[href*="volkswagenstiftung"],
+body.page-index a[href*="ontology.buffalo.edu"],
+body.page-index a[href*="www.ifomis.org"],
+body.page-index a[href*="basic-formal-ontology.org/bfo-discussion"] {
+  font-weight: bold;
+  text-decoration: none;
+  color: var(--ifm-link-color);
+}
+
+body.page-index a[href*="volkswagenstiftung"]:hover,
+body.page-index a[href*="ontology.buffalo.edu"]:hover,
+body.page-index a[href*="www.ifomis.org"]:hover,
+body.page-index a[href*="basic-formal-ontology.org/bfo-discussion"]:hover {
+  text-decoration: none;
+  font-weight: bold;
+  color: var(--ifm-link-color);
+}
+
+/* ------------------------------
+   Publications page specific styles
+   ------------------------------ */
+.page-publications-wrapper a {
+  font-weight: normal;
+  text-decoration: underline;
+}
+
+.page-publications-wrapper a:hover {
+  text-decoration: underline;
+}
+
+/* ------------------------------
+   FOL page specific styles
+   ------------------------------ */
+
+/* Unbold all text on FOL page by default */
+body.page-fol {
+  font-weight: normal !important;
+}
+
+/* Links on FOL page: underlined and not bold */
+body.page-fol a {
+  font-weight: normal !important;
+  text-decoration: underline !important;
+}
+
+/* Ensure bold text inside strong or b tags remains bold */
+body.page-fol strong,
+body.page-fol b {
+  font-weight: bold !important;
+}
+
+/* Add spacing between list items */
+body.page-fol ol li {
+  margin-bottom: 1rem !important;
+}
+
+/* Reduce left margin and padding for the ordered list */
+body.page-fol main .markdown ol {
+  margin-left: 1rem;      /* Smaller left indent */
+  padding-left: 1.25rem;  /* Adjust as needed */
+}
+
+/* Optional: display list items horizontally, wrap if needed */
+body.page-fol main .markdown ol.flex-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;              /* Space between items */
+  padding-left: 0;
+  margin-left: 0;
+  list-style-position: inside;
+}
+
+/* Default vertical layout styling */
+body.page-fol main .markdown ol li {
+  margin-bottom: 0.75rem; /* Spacing between items */
+  /* For horizontal layout: flex-basis setting */
+  /* flex: 1 1 300px; */
+}
+
+/* Make links inside list items not wrap and show ellipsis if too long */
+body.page-fol main .markdown ol li a {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: inline-block;
+  max-width: 100%;
+}
+
+/* Ensure links are underlined and normal weight */
+body.page-fol main .markdown ol li a {
+  font-weight: normal !important;
+  text-decoration: underline !important;
 }
