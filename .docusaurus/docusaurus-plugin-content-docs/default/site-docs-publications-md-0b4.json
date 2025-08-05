@@ -1,0 +1,18 @@
+{
+  "id": "publications",
+  "title": "Publications",
+  "description": "Books",
+  "source": "@site/docs/publications.md",
+  "sourceDirName": ".",
+  "slug": "/publications",
+  "permalink": "/docs/publications",
+  "draft": false,
+  "unlisted": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {
+    "id": "publications",
+    "title": "Publications",
+    "sidebar_label": "Publications"
+  }
+}
