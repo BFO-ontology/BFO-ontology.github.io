@@ -3,10 +3,10 @@
   "permalink": "/publications",
   "source": "@site/src/pages/publications.md",
   "title": "Publications",
-  "description": "Articles, presentations, and technical reports related to BFO.",
+  "description": "Books and peer-reviewed articles on Basic Formal Ontology (BFO)",
   "frontMatter": {
     "title": "Publications",
-    "description": "Articles, presentations, and technical reports related to BFO.",
+    "description": "Books and peer-reviewed articles on Basic Formal Ontology (BFO)",
     "slug": "/publications"
   },
   "unlisted": false

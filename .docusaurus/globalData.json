@@ -13,15 +13,15 @@
             {
               "id": "intro",
               "path": "/docs/intro",
-              "sidebar": "docs"
+              "sidebar": "defaultSidebar"
             }
           ],
           "draftIds": [],
           "sidebars": {
-            "docs": {
+            "defaultSidebar": {
               "link": {
                 "path": "/docs/intro",
-                "label": "Getting Started"
+                "label": "Introduction"
               }
             }
           }

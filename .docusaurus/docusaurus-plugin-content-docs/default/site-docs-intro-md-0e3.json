@@ -15,5 +15,5 @@
     "title": "Welcome to BFO",
     "sidebar_label": "Introduction"
   },
-  "sidebar": "docs"
+  "sidebar": "defaultSidebar"
 }

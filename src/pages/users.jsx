@@ -720,8 +720,8 @@ export default function UsersPage() {
       <div className="container margin-vert--lg">
         <h1>Users of BFO</h1>
         <p>
-          Below you will find an alphabetical list of <strong>ontologies</strong>,{' '}
-          <strong>institutions, groups and projects</strong>, and{' '}
+          Below you will find an alphabetical list of <strong>Ontologies</strong>,{' '}
+          <strong>Institutions, Groups and Projects</strong>, and{' '}
           <strong>Good Ontology Design (GoodOD)</strong> initiatives that use or support the Basic Formal Ontology.
         </p>
         <p>

@@ -10,6 +10,17 @@ const config = {
   organizationName: 'BFO-ontology',
   projectName: 'BFO-ontology.github.io',
 
+  headTags: [
+  {
+    tagName: 'link',
+    attributes: {
+      rel: 'stylesheet',
+      href: 'https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Source+Sans+Pro:wght@300;400;600&display=swap',
+    },
+  },
+],
+
+
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
 
@@ -17,28 +28,27 @@ const config = {
     defaultLocale: 'en',
     locales: ['en'],
   },
-
-  presets: [
-    [
-      '@docusaurus/preset-classic',
-      {
-        docs: {
-          routeBasePath: '/docs',
-          sidebarPath: require.resolve('./sidebars.js'),
-        },
-        blog: false,
-        theme: {
-          customCss: require.resolve('./src/css/custom.css'),
-        },
+presets: [
+  [
+    '@docusaurus/preset-classic',
+    {
+      blog: false,
+      theme: {
+        customCss: require.resolve('./src/css/custom.css'),
       },
-    ],
+    },
   ],
+],
 
   themeConfig: {
     navbar: {
       title: 'BFO',
+logo: {
+  alt: 'BFO Logo',
+  src: 'img/bfologo.png',
+},
       items: [
-        { to: '/docs/intro', label: 'Docs', position: 'left' },
+        
         {
           href: 'https://direct.mit.edu/books/book/4044/Building-Ontologies-with-Basic-Formal-Ontology',
           label: 'Guidebook',

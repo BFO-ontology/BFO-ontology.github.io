@@ -64,21 +64,21 @@ export default [
   },
   {
     path: '/docs',
-    component: ComponentCreator('/docs', 'c0d'),
+    component: ComponentCreator('/docs', '646'),
     routes: [
       {
         path: '/docs',
-        component: ComponentCreator('/docs', '35b'),
+        component: ComponentCreator('/docs', 'a10'),
         routes: [
           {
             path: '/docs',
-            component: ComponentCreator('/docs', '549'),
+            component: ComponentCreator('/docs', '117'),
             routes: [
               {
                 path: '/docs/intro',
-                component: ComponentCreator('/docs/intro', 'a6e'),
+                component: ComponentCreator('/docs/intro', '44d'),
                 exact: true,
-                sidebar: "docs"
+                sidebar: "defaultSidebar"
               }
             ]
           }
