@@ -1,9 +1,3 @@
-import React, { useState } from 'react';
-import Layout from '@theme/Layout';
-
-export default function UsersPage() {
-  const [search, setSearch] = useState('');
-
 const userData = {
   "Ontologies": [
     {
@@ -1946,90 +1940,6 @@ const userData = {
       "name": "ZEMELA Intelligent Agriculture Platform",
       "url": "https://ieeexplore.ieee.org/abstract/document/9627248"
     }
-   ],
-  "Good Ontology Design (GoodOD)": [
-    { name: "BFO2 Reference Ontology (bfo2-ref)", url: "https://github.com/BFO-ontology/BFO" },
-    { name: "NeOn Toolkit", url: "http://neon-toolkit.org/" },
-    { name: "OntoClean", url: "http://www.loa.istc.cnr.it/Papers/Guarino_Welty_OntoClean.pdf" },
-    { name: "OntoUML", url: "https://ontouml.org/" },
-    { name: "OOPS! (OntOlogy Pitfall Scanner!)", url: "http://oops.linkeddata.es/" },
-    { name: "Protege", url: "https://protege.stanford.edu/" },
-    { name: "WebProtégé", url: "https://webprotege.stanford.edu/" }
-  ]
+  ],
+  "Good Ontology Design (GoodOD)": []
 };
-  return (
-    <Layout title="Users" description="Ontologies, institutions, and projects using BFO">
-      <div className="container margin-vert--lg">
-        <h1>Users of BFO</h1>
-        <p>
-          Below you will find an alphabetical list of <strong>ontologies</strong>, <strong>institutions</strong>,{' '}
-          <strong>groups and projects</strong>, and <strong>Good Ontology Design (GoodOD)</strong> initiatives that use
-          or support the Basic Formal Ontology.
-        </p>
-        <p>
-          <strong>Jump to:</strong>{' '}
-          <a href="#ontologies">Ontologies</a> |{' '}
-          <a href="#institutions">Institutions</a> |{' '}
-          <a href="#groups-and-projects">Groups and Projects</a> |{' '}
-          <a href="#good-ontology-design-goodod">GoodOD</a>
-        </p>
-
-        <input
-          type="text"
-          placeholder="Search users..."
-          value={search}
-          onChange={(e) => setSearch(e.target.value)}
-          style={{
-            padding: '0.5rem',
-            width: '100%',
-            maxWidth: 400,
-            margin: '1rem 0',
-            borderRadius: '6px',
-            border: '1px solid #ccc',
-          }}
-        />
-
-        {Object.entries(userData).map(([category, items]) => {
-          const anchorId = category.toLowerCase().replace(/\s+/g, '-').replace(/[()]/g, '');
-          const filtered = items.filter((item) =>
-            item.name.toLowerCase().includes(search.toLowerCase())
-          );
-
-          if (!filtered.length) return null;
-
-          return (
-            <div key={category}>
-              <div id={anchorId} />
-              <details open className="margin-bottom--md">
-                <summary
-                  style={{
-                    fontSize: '1.2rem',
-                    fontWeight: 'bold',
-                    cursor: 'pointer',
-                  }}
-                >
-                  {category}
-                </summary>
-                <ul>
-                  {filtered
-                    .sort((a, b) => a.name.localeCompare(b.name))
-                    .map((item, idx) => (
-                      <li key={idx}>
-                        {item.url ? (
-                          <a href={item.url} target="_blank" rel="noopener noreferrer">
-                            {item.name}
-                          </a>
-                        ) : (
-                          item.name
-                        )}
-                      </li>
-                    ))}
-                </ul>
-              </details>
-            </div>
-          );
-        })}
-      </div>
-    </Layout>
-  );
-}

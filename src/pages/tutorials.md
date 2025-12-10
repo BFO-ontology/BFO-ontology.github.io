@@ -10,7 +10,7 @@ Explore video tutorials and recorded lectures introducing the principles, struct
 
 ---
 
-### 🎓 BFO Tutorial Playlists
+### BFO Tutorial Playlists
 
 - [**BFO Tutorial 2019**](https://www.youtube.com/watch?v=muafRW0bXgw&list=PLyngZgIl3WTj6tWcypTLpCnYXu6o93kD4&pp=0gcJCV8EOCosWNin)  
   Covers foundational concepts in BFO as presented in 2019.
@@ -23,7 +23,7 @@ Explore video tutorials and recorded lectures introducing the principles, struct
 
 ---
 
-### ▶️ Additional Resources
+### ▶Additional Resources
 
 - [**Barry Smith’s YouTube Playlists**](https://www.youtube.com/user/hxo3nql/playlists)  
   A broader collection of videos on BFO, ontology in science, and related topics.
