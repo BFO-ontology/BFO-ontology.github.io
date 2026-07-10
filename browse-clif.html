@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CLIF Formula Search</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: system-ui, -apple-system, sans-serif; background: #f5f7fb; color: #1e293b; line-height: 1.6; padding: 2rem; max-width: 960px; margin: 0 auto; }
+h1 { font-size: 1.5rem; font-weight: 600; display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap; color: #0f172a; }
+h1 > span:first-child { }
+.subtitle { font-size: .9rem; color: #64748b; margin-bottom: 1rem; }
+.group-filters { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+.search-bar { display: flex; gap: 0.5rem; position: sticky; top: 0; background: #f5f7fb; padding: 0.5rem 0; z-index: 10; }
+#search-input { flex: 1; min-width: 200px; padding: 0.65rem 1rem; font-size: 1rem; border: 1.5px solid #cbd5e1; border-radius: 8px; outline: none; transition: border-color 0.15s; background: #fff; }
+#search-input:focus { border-color: #6366f1; box-shadow: 0 0 0 3px rgba(99,102,241,0.15); }
+#search-input::placeholder { color: #94a3b8; }
+.group-filter { display: flex; align-items: center; gap: 0.3rem; font-size: 0.82rem; color: #64748b; cursor: pointer; user-select: none; white-space: nowrap; }
+.group-filter input { cursor: pointer; }
+.stats { font-size: 0.82rem; color: #64748b; margin-bottom: 1.25rem; min-height: 1.2em; }
+.results { display: flex; flex-direction: column; gap: 0.75rem; }
+.card { background: #fff; border: 1px solid #e2e8f0; border-radius: 10px; padding: 1.1rem 1.25rem; }
+.card-header { display: flex; align-items: baseline; gap: 0.5rem; flex-wrap: wrap; }
+.formula-id { font-weight: 700; font-size: 0.95rem; color: #4f46e5; font-family: monospace; }
+.file-tag { font-size: 0.78rem; background: #f1f5f9; color: #475569; padding: 0.15rem 0.55rem; border-radius: 4px; font-family: monospace; }
+.group-tag { font-size: 0.75rem; background: #f3e8ff; color: #6b21a8; padding: 0.15rem 0.55rem; border-radius: 4px; font-family: monospace; }
+.comment { margin-top: 0.5rem; font-size: 0.92rem; color: #334155; }
+.keywords { display: flex; flex-wrap: wrap; gap: 0.35rem; margin-top: 0.65rem; }
+.keyword-label { font-size: 0.78rem; font-weight: 600; color: #64748b; margin-right: 0.25rem; }
+.badge { font-size: 0.75rem; padding: 0.15rem 0.55rem; border-radius: 4px; font-weight: 500; cursor: pointer; }
+.badge:hover { opacity: 0.7; }
+.badge-class { background: #fef3c7; color: #92400e; }
+.badge-rel { background: #dbeafe; color: #1e40af; }
+.highlight { font-weight: 700; background: none; }
+.formula-text { margin-top: 0.65rem; font-size: 0.82rem; background: #fff; color: #1e293b; padding: 0.85rem 1rem; border-radius: 6px; border: 1px solid #e2e8f0; line-height: 1.65; overflow-x: auto; white-space: pre; font-family: monospace; }
+.no-results { text-align: center; color: #94a3b8; padding: 3rem 1rem; font-size: 0.95rem; }
+.error-msg { color: #ef4444; font-size: 0.85rem; padding: 1rem; background: #fef2f2; border-radius: 8px; margin-top: 1rem; }
+</style>
+</head>
+<body>
+<h1><span>CLIF Formula Search</span><span class="group-filters" id="group-filters"><span style="font-size:.82rem;color:#94a3b8;">Loading sources...</span></span></h1>
+<p class="subtitle">Search across BFO-2020 formula definitions</p>
+<div class="search-bar">
+  <input type="text" id="search-input" placeholder="Type to search formulas..." autocomplete="off">
+</div>
+<div class="stats" id="stats"></div>
+<div id="results"></div>
+
+<script>
+var CONF = {
+  "BFO Axiomatization": {
+    base: "https://raw.githubusercontent.com/BFO-ontology/BFO-2020/refs/heads/master/21838-2/common-logic/",
+    sections: ["continuant-mereology.cl", "history.cl", "order.cl", "spatiotemporal.cl",
+               "universal-declaration.cl", "existence-instantiation.cl", "material-entity.cl",
+               "participation.cl", "specific-dependency.cl", "generic-dependence.cl",
+               "occurrent-mereology.cl", "spatial.cl", "temporal-region.cl"]
+  },
+  "Change": {
+    base: "https://raw.githubusercontent.com/BFO-ontology/BFO-2020/refs/heads/master/contrib/change/",
+    sections: ["change.cl"]
+  },
+  "Allen Relations": {
+    base: "https://raw.githubusercontent.com/BFO-ontology/BFO-2020/refs/heads/master/21838-2/common-logic/contributions/",
+    sections: ["allen-relation-definitions.cl"]
+  }
+};
+
+var GROUP_ORDER = {"BFO Axiomatization": 0, "Change": 1, "Allen Relations": 2};
+var gkList = Object.keys(GROUP_ORDER);
+
+var DATA = [];
+
+// === S-expression helpers ===
+
+function nextWS(s, i) {
+  while (i < s.length && /\s/.test(s[i])) i++;
+  return i;
+}
+
+function pastSingleQuote(s, i) {
+  i++;
+  while (i < s.length) {
+    if (s[i] === '\\' && i + 1 < s.length) { i += 2; continue; }
+    if (s[i] === "'") return i + 1;
+    i++;
+  }
+  return s.length;
+}
+
+function pastDoubleQuote(s, i) {
+  i++;
+  while (i < s.length) {
+    if (s[i] === '\\' && i + 1 < s.length) { i += 2; continue; }
+    if (s[i] === '"') return i + 1;
+    i++;
+  }
+  return s.length;
+}
+
+function quoteTextSingle(s, i) {
+  i++;
+  var start = i;
+  while (i < s.length) {
+    if (s[i] === '\\' && i + 1 < s.length) { i += 2; continue; }
+    if (s[i] === "'") return [s.substring(start, i), i + 1];
+    i++;
+  }
+  return [s.substring(start, i), i];
+}
+
+function quoteTextDouble(s, i) {
+  i++;
+  var start = i;
+  while (i < s.length) {
+    if (s[i] === '\\' && i + 1 < s.length) { i += 2; continue; }
+    if (s[i] === '"') return [s.substring(start, i), i + 1];
+    i++;
+  }
+  return [s.substring(start, i), i];
+}
+
+function pastSexpr(s, i) {
+  var depth = 1;
+  i++;
+  while (i < s.length && depth > 0) {
+    if (s[i] === "'") {
+      i = pastSingleQuote(s, i);
+    } else if (s[i] === '"') {
+      i = pastDoubleQuote(s, i);
+    } else if (s[i] === '(') {
+      depth++;
+      i++;
+    } else if (s[i] === ')') {
+      depth--;
+      if (depth === 0) { i++; break; }
+      i++;
+    } else {
+      i++;
+    }
+  }
+  return i;
+}
+
+// === Parser ===
+
+function parseCLFile(content, section) {
+  var idx = content.indexOf('(cl:ttl');
+  if (idx < 0) return [];
+  var end = pastSexpr(content, idx);
+
+  var uriPos = content.indexOf('"', idx + '(cl:ttl'.length);
+  var uriEnd = uriPos >= 0 ? content.indexOf('"', uriPos + 1) : -1;
+  var afterLabel;
+  if (uriEnd >= 0) {
+    afterLabel = uriEnd + 1;
+  } else {
+    var p = idx + '(cl:ttl'.length;
+    p = nextWS(content, p);
+    var spaceIdx = p;
+    while (spaceIdx < end && !/\s/.test(content[spaceIdx])) spaceIdx++;
+    afterLabel = spaceIdx;
+  }
+
+  var ttlBody = content.substring(afterLabel, end - 1);
+  var parseBody = ttlBody;
+  var textPos = nextWS(ttlBody, 0);
+  if (ttlBody.startsWith('(cl:text', textPos)) {
+    var textEnd = pastSexpr(ttlBody, textPos);
+    parseBody = ttlBody.substring(textPos + '(cl:text'.length, textEnd - 1);
+  }
+
+  return parseComments(parseBody, section);
+}
+
+function parseComments(inner, section) {
+  var result = [];
+  var pos = 0;
+
+  while (pos < inner.length) {
+    pos = nextWS(inner, pos);
+    if (pos >= inner.length) break;
+
+    if (inner.startsWith('(cl:outdiscourse', pos) ||
+        inner.startsWith('(cl:text', pos) ||
+        inner.startsWith('(cl:ttl', pos) ||
+        inner.startsWith('(cl:label', pos)) {
+      pos = pastSexpr(inner, pos);
+      continue;
+    }
+
+    if (!inner.startsWith('(cl:comment', pos)) {
+      if (inner[pos] === '(') {
+        pos = pastSexpr(inner, pos);
+      } else {
+        pos++;
+      }
+      continue;
+    }
+
+    var p = pos + '(cl:comment'.length;
+    p = nextWS(inner, p);
+
+    var commentText = null;
+    var afterQuote;
+
+    if (p < inner.length) {
+      if (inner[p] === "'") {
+        var qt = quoteTextSingle(inner, p);
+        commentText = qt[0];
+        afterQuote = qt[1];
+      } else if (inner[p] === '"') {
+        var qt = quoteTextDouble(inner, p);
+        commentText = qt[0];
+        afterQuote = qt[1];
+      }
+    }
+
+    if (!commentText) {
+      pos++;
+      continue;
+    }
+
+    p = nextWS(inner, afterQuote);
+    if (p >= inner.length || inner[p] !== '(') {
+      pos = p;
+      continue;
+    }
+
+    var formulaEnd = pastSexpr(inner, p);
+    var formula = inner.substring(p, formulaEnd).trim().replace(/\t/g, ' ');
+    var idMatch = commentText.match(/\[([^\]]+)\]\s*$/);
+    var identifier = idMatch ? idMatch[1] : null;
+
+    result.push({
+      section: section,
+      comment: commentText.replace(/\\'/g, "'").replace(/\\"/g, '"'),
+      formula: formula,
+      identifier: identifier,
+      keywords: []
+    });
+
+    pos = formulaEnd;
+  }
+
+  return result;
+}
+
+// === Extraction ===
+
+var LAC = new Set(['and', 'or', 'not', '=', 'if', 'iff', 'forall', 'exists']);
+
+function extract(text) {
+  var allClasses = [];
+  var allRelations = [];
+
+  function nextPos(s, i) {
+    while (i < s.length && /\s/.test(s[i])) i++;
+    return i;
+  }
+
+  function parse(s, i) {
+    i = nextPos(s, i);
+    if (i >= s.length) return { node: null, end: i };
+    if (s[i] === '(') {
+      i++;
+      var children = [];
+      while (true) {
+        i = nextPos(s, i);
+        if (i >= s.length || s[i] === ')') break;
+        var r = parse(s, i);
+        children.push(r.node);
+        i = r.end;
+      }
+      i = nextPos(s, i + 1);
+      return { node: children, end: i };
+    }
+    var start = i;
+    while (i < s.length && !/\s|\(|\)/.test(s[i])) i++;
+    return { node: s.substring(start, i), end: i };
+  }
+
+  function ec(v, bv) {
+    if (typeof v === 'string' && !bv.has(v)) allClasses.push(v);
+  }
+
+  function walk(t, bv) {
+    if (!Array.isArray(t)) return;
+    var head = t[0];
+    var isQuant = head === 'forall' || head === 'exists';
+    var isIns = head === 'instance-of';
+
+    if (isQuant) {
+      var newBv = new Set(bv);
+      var varList = t[1];
+      if (Array.isArray(varList)) {
+        for (var j = 0; j < varList.length; j++) newBv.add(varList[j]);
+      } else if (typeof varList === 'string') {
+        newBv.add(varList);
+      }
+      for (var i = 2; i < t.length; i++) {
+        if (Array.isArray(t[i])) walk(t[i], newBv);
+      }
+      return;
+    }
+
+    if (isIns && t.length >= 3) {
+      var className = t[2];
+      if (className && typeof className === 'string') ec(className, bv);
+      for (var i = 3; i < t.length; i++) {
+        if (Array.isArray(t[i])) walk(t[i], bv);
+      }
+      return;
+    }
+
+    if (typeof head === 'string' && !LAC.has(head)) {
+      allRelations.push(head);
+    }
+
+    for (var i = 0; i < t.length; i++) {
+      if (Array.isArray(t[i])) walk(t[i], bv);
+    }
+  }
+
+  var r = parse(text, 0);
+  if (r.node) walk(r.node, new Set());
+
+  var seen = {};
+  var clsOut = [];
+  allClasses.forEach(function(c) { if (!seen[c]) { seen[c] = true; clsOut.push(c); } });
+  var seen2 = {};
+  var relOut = [];
+  allRelations.forEach(function(r) { if (!seen2[r]) { seen2[r] = true; relOut.push(r); } });
+
+  return { classes: clsOut, relations: relOut };
+}
+
+// === Load ===
+
+function showErr(msg) {
+  var el = document.createElement('div');
+  el.className = 'error-msg';
+  el.textContent = msg;
+  var resultsEl = document.getElementById('results');
+  resultsEl.parentNode.insertBefore(el, resultsEl);
+}
+
+async function loadAll() {
+  var groupsEl = document.getElementById('group-filters');
+  groupsEl.innerHTML = '';
+
+  var FIXED_CHECK_ORDER = ["BFO Axiomatization", "Change", "Allen Relations"];
+  for (var ci = 0; ci < FIXED_CHECK_ORDER.length; ci++) {
+    var gk = FIXED_CHECK_ORDER[ci];
+    var lbl = document.createElement('label');
+    lbl.className = 'group-filter';
+    var cb = document.createElement('input');
+    cb.type = 'checkbox';
+    cb.checked = (gk === "BFO Axiomatization");
+    cb.dataset.group = gk;
+    lbl.appendChild(cb);
+    lbl.appendChild(document.createTextNode(' ' + gk));
+    groupsEl.appendChild(lbl);
+  }
+
+  var errCount = 0;
+  var FIXED_FETCH_ORDER = ["BFO Axiomatization", "Change", "Allen Relations"];
+  for (var fi2 = 0; fi2 < FIXED_FETCH_ORDER.length; fi2++) {
+    var groupKey2 = FIXED_FETCH_ORDER[fi2];
+    for (var si = 0; si < CONF[groupKey2].sections.length; si++) {
+      var section = CONF[groupKey2].sections[si];
+      try {
+        var url = CONF[groupKey2].base + section;
+        console.log('Fetching:', url);
+        var resp = await fetch(url);
+        console.log('Received:', url, 'status:', resp.status);
+        if (!resp.ok) throw 'HTTP ' + resp.status;
+        var text = await resp.text();
+        console.log('Body length:', url, text.length);
+        if (!text.trim()) continue;
+
+        var formulas = parseCLFile(text, section.replace('.cl', ''));
+        console.log('Parsed formulas:', url, formulas.length);
+        var jsonName = section.replace('.cl', '.json');
+
+        for (var fi = 0; fi < formulas.length; fi++) {
+          var extracted = extract(formulas[fi].formula);
+          formulas[fi].file = jsonName;
+          formulas[fi].formulaId = formulas[fi].identifier || null;
+          formulas[fi].group = groupKey2;
+          formulas[fi].classes = extracted.classes;
+          formulas[fi].relations = extracted.relations;
+          DATA.push(formulas[fi]);
+        }
+      } catch (err) {
+        errCount++;
+        console.error('Failed:', section, err);
+        showErr('Failed: ' + section + ' - ' + err);
+      }
+    }
+  }
+
+  var FIXED_ORDER = ["BFO Axiomatization", "Change", "Allen Relations"];
+  var newData = [];
+  for (var gi = 0; gi < FIXED_ORDER.length; gi++) {
+    var fg = FIXED_ORDER[gi];
+    var groupItems = [];
+    for (var di = DATA.length - 1; di >= 0; di--) {
+      if (DATA[di].group === fg) {
+        groupItems.push(DATA.splice(di, 1)[0]);
+      }
+    }
+    groupItems.sort(function(a, b) {
+      return (a.formula || '').length - (b.formula || '').length;
+    });
+    for (var j = 0; j < groupItems.length; j++) {
+      newData.push(groupItems[j]);
+    }
+  }
+  DATA = newData;
+
+  refreshResults();
+}
+
+// === Render ===
+
+function escapeHtml(s) {
+  return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+}
+
+function escapeRegex(s) {
+  return s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+}
+
+function highlightText(text, query) {
+  if (!query) return escapeHtml(text);
+  return escapeHtml(text).replace(new RegExp('(' + escapeRegex(query) + ')', 'gi'), '<span class="highlight">$1</span>');
+}
+
+function escapeAttr(s) {
+  return s.replace(/&/g, '&amp;').replace(/"/g, '&#34;');
+}
+
+function getActiveGroups() {
+  var out = [];
+  var boxes = document.querySelectorAll('.group-filter input:checked');
+  for (var i = 0; i < boxes.length; i++) out.push(boxes[i].dataset.group);
+  return out;
+}
+
+function filterFormulas(query, activeGroups) {
+  var filtered = DATA;
+  if (activeGroups.length > 0) {
+    filtered = DATA.filter(function(item) {
+      return activeGroups.indexOf(item.group) !== -1;
+    });
+  } else {
+    filtered = [];
+  }
+  if (!query) return filtered;
+  var words = query.trim().toLowerCase().split(/\s+/).filter(function(w) { return w.length > 0; });
+  return filtered.filter(function(item) {
+    var searchable = [item.comment, item.formulaId]
+      .concat(item.classes).concat(item.relations)
+      .concat([item.file]).join(' ').toLowerCase();
+    for (var w = 0; w < words.length; w++) {
+      if (searchable.indexOf(words[w]) === -1) return false;
+    }
+    return true;
+  });
+}
+
+function renderResults(results, query) {
+  document.getElementById('stats').textContent = results.length + ' of ' + DATA.length + ' formulas';
+  if (results.length === 0) {
+    document.getElementById('results').innerHTML = '<div class="no-results">No formulas match your search.</div>';
+    return;
+  }
+  var html = '';
+  for (var i = 0; i < results.length; i++) {
+    var item = results[i];
+    html += '<div class="card">';
+    html += '<div class="card-header">';
+    html += '<span class="formula-id">' + highlightText(item.formulaId || '', query) + '</span>';
+    html += '<span class="file-tag">' + highlightText(item.file.replace(/\.[^.]+$/, ''), query) + '</span>';
+    html += '<span class="group-tag">' + highlightText(item.group, query) + '</span>';
+    html += '</div>';
+    html += '<div class="comment">' + highlightText(item.comment, query) + '</div>';
+
+    if (item.formula) {
+      var display = escapeHtml(item.formula);
+      if (query) {
+        var qWords = query.trim().toLowerCase().split(/\s+/).filter(function(w) { return w.length > 0; });
+        for (var wi = 0; wi < qWords.length; wi++) {
+          var re = new RegExp('(' + escapeRegex(qWords[wi]) + ')', 'gi');
+          display = display.replace(re, '<mark class="highlight">$1</mark>');
+        }
+      }
+      html += '<div class="formula-text">' + display + '</div>';
+    }
+
+    if (item.classes.length > 0 || item.relations.length > 0) {
+      html += '<div class="keywords">';
+      if (item.classes.length > 0) {
+        for (var ci = 0; ci < item.classes.length; ci++) {
+          html += '<span class="badge badge-class" onclick="clickBadge(this)" data-bt="' + escapeAttr(item.classes[ci]) + '">' + highlightText(item.classes[ci], query) + '</span>';
+        }
+      }
+      if (item.relations.length > 0) {
+        for (var ri = 0; ri < item.relations.length; ri++) {
+          html += '<span class="badge badge-rel" onclick="clickBadge(this)" data-bt="' + escapeAttr(item.relations[ri]) + '">' + highlightText(item.relations[ri], query) + '</span>';
+        }
+      }
+      html += '</div>';
+    }
+
+    html += '</div>';
+  }
+  document.getElementById('results').innerHTML = html;
+}
+
+function clickBadge(el) {
+  var text = el.getAttribute('data-bt');
+  if (text) {
+    document.getElementById('search-input').value = text;
+    refreshResults();
+    window.scrollTo(0, 0);
+  }
+}
+
+var debounceTimer;
+function refreshResults() {
+  var query = document.getElementById('search-input').value.trim();
+  var groups = getActiveGroups();
+  renderResults(filterFormulas(query, groups), query);
+}
+
+document.getElementById('search-input').addEventListener('input', function() {
+  clearTimeout(debounceTimer);
+  debounceTimer = setTimeout(refreshResults, 150);
+});
+
+document.getElementById('results').addEventListener('click', function(e) {
+  if (e.target.classList.contains('badge')) {
+    clickBadge(e.target);
+  }
+});
+
+document.getElementById('group-filters').addEventListener('change', function() {
+  clearTimeout(debounceTimer);
+  debounceTimer = setTimeout(refreshResults, 50);
+});
+
+loadAll();
+</script>
+</body>
+</html>
