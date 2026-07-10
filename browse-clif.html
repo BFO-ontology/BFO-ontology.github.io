@@ -35,6 +35,20 @@ h1 > span:first-child { }
 .formula-text { margin-top: 0.65rem; font-size: 0.82rem; background: #fff; color: #1e293b; padding: 0.85rem 1rem; border-radius: 6px; border: 1px solid #e2e8f0; line-height: 1.65; overflow-x: auto; white-space: pre; font-family: monospace; }
 .no-results { text-align: center; color: #94a3b8; padding: 3rem 1rem; font-size: 0.95rem; }
 .error-msg { color: #ef4444; font-size: 0.85rem; padding: 1rem; background: #fef2f2; border-radius: 8px; margin-top: 1rem; }
+.issues-toggle { font-size: 0.82rem; color: #64748b; cursor: pointer; user-select: none; white-space: nowrap; padding: 0.25rem 0.6rem; border: 1.5px solid #e2e8f0; border-radius: 6px; background: #fff; transition: border-color 0.15s; }
+.issues-toggle:hover { border-color: #6366f1; }
+.issues-toggle.active { border-color: #6366f1; background: #eef2ff; color: #4f46e5; }
+.issues-toggle .count { font-weight: 600; }
+.issues-section { display: none; margin-top: 1rem; }
+.issues-section.open { display: block; }
+.issues-stats { font-size: 0.82rem; color: #64748b; margin-bottom: 0.75rem; }
+.issue-inline { font-size: 0.78rem; color: #64748b; margin-top: 0.35rem; line-height: 1.5; }
+.issue-inline .issue-state { font-size: 0.65rem; padding: 0.05rem 0.35rem; border-radius: 3px; font-weight: 600; text-transform: uppercase; margin-right: 0.3rem; vertical-align: middle; }
+.issue-inline .issue-state.open { background: #dcfce7; color: #166534; }
+.issue-inline .issue-state.closed { background: #f1f5f9; color: #475569; }
+.issue-inline .issue-link { font-size: 0.78rem; color: #6366f1; text-decoration: none; }
+.issue-inline .issue-link:hover { text-decoration: underline; }
+.issue-inline .issue-num { font-size: 0.72rem; color: #94a3b8; margin-left: 0.3rem; font-family: monospace; }
 </style>
 </head>
 <body>
@@ -44,10 +58,9 @@ h1 > span:first-child { }
   <input type="text" id="search-input" placeholder="Type to search formulas..." autocomplete="off">
 </div>
 <div class="stats" id="stats"></div>
-<div id="results"></div>
+<div id="results" class="results"></div>
 
-<script>
-var CONF = {
+<script>var CONF = {
   "BFO Axiomatization": {
     base: "https://raw.githubusercontent.com/BFO-ontology/BFO-2020/refs/heads/master/21838-2/common-logic/",
     sections: ["continuant-mereology.cl", "history.cl", "order.cl", "spatiotemporal.cl",
@@ -363,6 +376,7 @@ async function loadAll() {
   }
 
   var errCount = 0;
+  var idMap = {};
   var FIXED_FETCH_ORDER = ["BFO Axiomatization", "Change", "Allen Relations"];
   for (var fi2 = 0; fi2 < FIXED_FETCH_ORDER.length; fi2++) {
     var groupKey2 = FIXED_FETCH_ORDER[fi2];
@@ -384,12 +398,37 @@ async function loadAll() {
 
         for (var fi = 0; fi < formulas.length; fi++) {
           var extracted = extract(formulas[fi].formula);
-          formulas[fi].file = jsonName;
-          formulas[fi].formulaId = formulas[fi].identifier || null;
-          formulas[fi].group = groupKey2;
-          formulas[fi].classes = extracted.classes;
-          formulas[fi].relations = extracted.relations;
-          DATA.push(formulas[fi]);
+          var sectionName = section.replace('.cl', '');
+          var identifier = formulas[fi].identifier || formulas[fi].comment;
+          var entry = idMap[identifier];
+          if (entry) {
+            if (entry.sections.indexOf(sectionName) === -1) {
+              entry.sections.push(sectionName);
+            }
+            for (var ci = 0; ci < extracted.classes.length; ci++) {
+              if (entry.classes.indexOf(extracted.classes[ci]) === -1) {
+                entry.classes.push(extracted.classes[ci]);
+              }
+            }
+            for (var ri = 0; ri < extracted.relations.length; ri++) {
+              if (entry.relations.indexOf(extracted.relations[ri]) === -1) {
+                entry.relations.push(extracted.relations[ri]);
+              }
+            }
+          } else {
+            var entry = {
+              comment: formulas[fi].comment.replace(/\\'/g, "'").replace(/\\"/g, '"'),
+              formula: formulas[fi].formula,
+              identifier: identifier,
+              formulaId: formulas[fi].identifier || null,
+              group: groupKey2,
+              file: sectionName + '.json',
+              sections: [sectionName],
+              classes: extracted.classes,
+              relations: extracted.relations
+            };
+            idMap[identifier] = entry;
+          }
         }
       } catch (err) {
         errCount++;
@@ -400,6 +439,7 @@ async function loadAll() {
   }
 
   var FIXED_ORDER = ["BFO Axiomatization", "Change", "Allen Relations"];
+  DATA = Object.keys(idMap).map(function(k) { return idMap[k]; });
   var newData = [];
   for (var gi = 0; gi < FIXED_ORDER.length; gi++) {
     var fg = FIXED_ORDER[gi];
@@ -461,7 +501,7 @@ function filterFormulas(query, activeGroups) {
   return filtered.filter(function(item) {
     var searchable = [item.comment, item.formulaId]
       .concat(item.classes).concat(item.relations)
-      .concat([item.file]).join(' ').toLowerCase();
+      .concat(item.sections || []).join(' ').toLowerCase();
     for (var w = 0; w < words.length; w++) {
       if (searchable.indexOf(words[w]) === -1) return false;
     }
@@ -481,7 +521,13 @@ function renderResults(results, query) {
     html += '<div class="card">';
     html += '<div class="card-header">';
     html += '<span class="formula-id">' + highlightText(item.formulaId || '', query) + '</span>';
-    html += '<span class="file-tag">' + highlightText(item.file.replace(/\.[^.]+$/, ''), query) + '</span>';
+    if (item.sections) {
+      for (var sti = 0; sti < item.sections.length; sti++) {
+        html += '<span class="file-tag">' + highlightText(item.sections[sti], query) + '</span>';
+      }
+    } else {
+      html += '<span class="file-tag">' + highlightText(item.file ? item.file.replace(/\.[^.]+$/, '') : '', query) + '</span>';
+    }
     html += '<span class="group-tag">' + highlightText(item.group, query) + '</span>';
     html += '</div>';
     html += '<div class="comment">' + highlightText(item.comment, query) + '</div>';
@@ -496,6 +542,11 @@ function renderResults(results, query) {
         }
       }
       html += '<div class="formula-text">' + display + '</div>';
+    }
+
+    var issuesHtml = renderInlineIssues(item);
+    if (issuesHtml) {
+      html += '<div style="margin-top:-0.5rem;">' + issuesHtml + '</div>';
     }
 
     if (item.classes.length > 0 || item.relations.length > 0) {
@@ -550,7 +601,65 @@ document.getElementById('group-filters').addEventListener('change', function() {
   debounceTimer = setTimeout(refreshResults, 50);
 });
 
+
+// === GitHub Issues (shown inline with formulas) ===
+
+var ISSUE_MAP = {}; // code -> [issues]
+var ISSUE_CODE_RE = /\b([a-z]{3}-\d)\b/g;
+
+function parseIssueCodes(title) {
+  ISSUE_CODE_RE.lastIndex = 0;
+  var codes = [];
+  var m;
+  while ((m = ISSUE_CODE_RE.exec(title)) !== null) {
+    codes.push(m[1]);
+  }
+  return codes;
+}
+
+function loadIssues() {
+  fetch('https://api.github.com/repos/BFO-ontology/BFO-2020/issues?state=all&per_page=100')
+    .then(function(r) { return r.json(); })
+    .then(function(issues) {
+      if (!Array.isArray(issues)) { ISSUE_MAP = {}; refreshResults(); return; }
+      ISSUE_MAP = {};
+      for (var ii = 0; ii < issues.length; ii++) {
+        var issue = issues[ii];
+        var codes = parseIssueCodes(issue.title);
+        for (var c = 0; c < codes.length; c++) {
+          if (!ISSUE_MAP[codes[c]]) ISSUE_MAP[codes[c]] = [];
+          ISSUE_MAP[codes[c]].push(issue);
+        }
+      }
+      refreshResults();
+    })
+    .catch(function(err) {
+      console.error('Issues load failed:', err);
+    });
+}
+
+function renderInlineIssues(formulaItem) {
+  var identifier = formulaItem.identifier;
+  if (!identifier) return '';
+  var issues = ISSUE_MAP[identifier];
+  if (!issues || issues.length === 0) return '';
+  var html = '';
+  for (var i = 0; i < issues.length; i++) {
+    var issue = issues[i];
+    html += '<div class="issue-inline">';
+    html += '<span class="issue-num">#' + escapeHtml(String(issue.number)) + '</span> ';
+    html += '<a class="issue-link" href="' + escapeHtml(issue.html_url) + '" target="_blank">' + escapeHtml(issue.title) + '</a>';
+    html += ' ';
+    html += '<span class="issue-state ' + issue.state + '">' + escapeHtml(issue.state) + '</span>';
+    html += '</div>';
+  }
+  return html;
+}
+
+function stateClass(s) { return s === 'open' ? 'issue-state open' : 'issue-state closed'; }
+
+// Start loading issues and formulas when page loads
 loadAll();
+loadIssues();
+
 </script>
-</body>
-</html>
