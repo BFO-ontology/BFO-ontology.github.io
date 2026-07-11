@@ -7,41 +7,38 @@
 <style>
 * { box-sizing: border-box; margin: 0; padding: 0; }
 body { font-family: system-ui, -apple-system, sans-serif; background: #f5f7fb; color: #1e293b; line-height: 1.6; padding: 2rem; max-width: 960px; margin: 0 auto; }
-h1 { font-size: 1.5rem; font-weight: 600; display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap; color: #0f172a; }
-h1 > span:first-child { }
-.subtitle { font-size: .9rem; color: #64748b; margin-bottom: 1rem; }
-.group-filters { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+h1 { font-size: 1.5rem; font-weight: 600; color: #0f172a; line-height: 1.3; }
+.header-row { display: flex; gap: 1.5rem; align-items: center; min-height: 3.4rem; }
+.header-title-block { min-width: 0; }
+.subtitle { font-size: .9rem; color: #64748b; margin-top: 0.25rem; }
+.group-filters-column { display: flex; flex-direction: column; gap: 0.25rem; flex-shrink: 0; padding-top: 0.3rem; align-self: center; }
+.group-filter { display: flex; align-items: center; gap: 0.3rem; font-size: 0.82rem; color: #64748b; cursor: pointer; user-select: none; white-space: nowrap; padding-right: 1.5rem; }
+.group-filter input { cursor: pointer; }
 .search-bar { display: flex; gap: 0.5rem; position: sticky; top: 0; background: #f5f7fb; padding: 0.5rem 0; z-index: 10; }
 #search-input { flex: 1; min-width: 200px; padding: 0.65rem 1rem; font-size: 1rem; border: 1.5px solid #cbd5e1; border-radius: 8px; outline: none; transition: border-color 0.15s; background: #fff; }
 #search-input:focus { border-color: #6366f1; box-shadow: 0 0 0 3px rgba(99,102,241,0.15); }
 #search-input::placeholder { color: #94a3b8; }
-.group-filter { display: flex; align-items: center; gap: 0.3rem; font-size: 0.82rem; color: #64748b; cursor: pointer; user-select: none; white-space: nowrap; }
-.group-filter input { cursor: pointer; }
-.stats { font-size: 0.82rem; color: #64748b; margin-bottom: 1.25rem; min-height: 1.2em; }
+.search-clear { cursor: pointer; font-size: 1.2rem; color: #94a3b8; line-height: 1; user-select: none; padding: 0.25rem; display: none; }
+.search-clear:hover { color: #6366f1; }
+.stats { font-size: 0.82rem; color: #64748b; margin-bottom: 1.25rem; min-height: 1.2em; display: flex; align-items: center; gap: 0.4rem; flex-wrap: wrap; }
 .results { display: flex; flex-direction: column; gap: 0.75rem; }
 .card { background: #fff; border: 1px solid #e2e8f0; border-radius: 10px; padding: 1.1rem 1.25rem; }
 .card-header { display: flex; align-items: baseline; gap: 0.5rem; flex-wrap: wrap; }
 .formula-id { font-weight: 700; font-size: 0.95rem; color: #4f46e5; font-family: monospace; }
-.file-tag { font-size: 0.78rem; background: #f1f5f9; color: #475569; padding: 0.15rem 0.55rem; border-radius: 4px; font-family: monospace; }
+.file-tag { font-size: 0.78rem; background: #f1f5f9; color: #475569; padding: 0.15rem 0.55rem; border-radius: 4px; font-family: monospace; cursor: default; }
+.file-tag.section-clickable { cursor: pointer; }
 .group-tag { font-size: 0.75rem; background: #f3e8ff; color: #6b21a8; padding: 0.15rem 0.55rem; border-radius: 4px; font-family: monospace; }
 .comment { margin-top: 0.5rem; font-size: 0.92rem; color: #334155; }
-.keywords { display: flex; flex-wrap: wrap; gap: 0.35rem; margin-top: 0.65rem; }
-.keyword-label { font-size: 0.78rem; font-weight: 600; color: #64748b; margin-right: 0.25rem; }
-.badge { font-size: 0.75rem; padding: 0.15rem 0.55rem; border-radius: 4px; font-weight: 500; cursor: pointer; }
-.badge:hover { opacity: 0.7; }
+.badge { font-size: 0.75rem; padding: 0.15rem 0.55rem; border-radius: 4px; font-weight: 500; cursor: pointer; transition: font-weight 0.15s; display: inline-block; }
 .badge-class { background: #fef3c7; color: #92400e; }
 .badge-rel { background: #dbeafe; color: #1e40af; }
 .highlight { font-weight: 700; background: none; }
 .formula-text { margin-top: 0.65rem; font-size: 0.82rem; background: #fff; color: #1e293b; padding: 0.85rem 1rem; border-radius: 6px; border: 1px solid #e2e8f0; line-height: 1.65; overflow-x: auto; white-space: pre; font-family: monospace; }
 .no-results { text-align: center; color: #94a3b8; padding: 3rem 1rem; font-size: 0.95rem; }
 .error-msg { color: #ef4444; font-size: 0.85rem; padding: 1rem; background: #fef2f2; border-radius: 8px; margin-top: 1rem; }
-.issues-toggle { font-size: 0.82rem; color: #64748b; cursor: pointer; user-select: none; white-space: nowrap; padding: 0.25rem 0.6rem; border: 1.5px solid #e2e8f0; border-radius: 6px; background: #fff; transition: border-color 0.15s; }
-.issues-toggle:hover { border-color: #6366f1; }
-.issues-toggle.active { border-color: #6366f1; background: #eef2ff; color: #4f46e5; }
-.issues-toggle .count { font-weight: 600; }
-.issues-section { display: none; margin-top: 1rem; }
-.issues-section.open { display: block; }
-.issues-stats { font-size: 0.82rem; color: #64748b; margin-bottom: 0.75rem; }
+.section-pill { display: inline-flex; align-items: center; gap: 0.3rem; font-size: 0.78rem; background: #ede9fe; color: #6d28d9; padding: 0.15rem 0.5rem; border-radius: 4px; font-family: monospace; }
+.section-pill .section-pill-clear { cursor: pointer;font-weight: 700;font-size: 0.85rem;margin-left: 0.1rem;color: #7c3aed;line-height: 1; }
+.section-pill .section-pill-clear:hover { color: #4c1d95; }
 .issue-inline { font-size: 0.78rem; color: #64748b; margin-top: 0.35rem; line-height: 1.5; }
 .issue-inline .issue-state { font-size: 0.65rem; padding: 0.05rem 0.35rem; border-radius: 3px; font-weight: 600; text-transform: uppercase; margin-right: 0.3rem; vertical-align: middle; }
 .issue-inline .issue-state.open { background: #dcfce7; color: #166534; }
@@ -49,12 +46,19 @@ h1 > span:first-child { }
 .issue-inline .issue-link { font-size: 0.78rem; color: #6366f1; text-decoration: none; }
 .issue-inline .issue-link:hover { text-decoration: underline; }
 .issue-inline .issue-num { font-size: 0.72rem; color: #94a3b8; margin-left: 0.3rem; font-family: monospace; }
+.group-section-count { font-size: 0.78rem; color: #94a3b8; margin-left: 0.25rem; }
 </style>
 </head>
 <body>
-<h1><span>CLIF Formula Search</span><span class="group-filters" id="group-filters"><span style="font-size:.82rem;color:#94a3b8;">Loading sources...</span></span></h1>
-<p class="subtitle">Search across BFO-2020 formula definitions</p>
+<div class="header-row">
+  <div class="header-title-block">
+    <h1>CLIF Formula Search</h1>
+    <p class="subtitle">Search across BFO-2020 and contributions formulas</p>
+  </div>
+  <span class="group-filters-column" id="group-filters"><span style="font-size:.82rem;color:#94a3b8;">Loading sources...</span></span>
+</div>
 <div class="search-bar">
+  <span class="search-clear" id="search-clear">×</span>
   <input type="text" id="search-input" placeholder="Type to search formulas..." autocomplete="off">
 </div>
 <div class="stats" id="stats"></div>
@@ -79,9 +83,9 @@ h1 > span:first-child { }
 };
 
 var GROUP_ORDER = {"BFO Axiomatization": 0, "Change": 1, "Allen Relations": 2};
-var gkList = Object.keys(GROUP_ORDER);
 
 var DATA = [];
+var activeSectionFilter = null;
 
 // === S-expression helpers ===
 
@@ -147,9 +151,7 @@ function pastSexpr(s, i) {
       depth--;
       if (depth === 0) { i++; break; }
       i++;
-    } else {
-      i++;
-    }
+    } else { i++; }
   }
   return i;
 }
@@ -228,30 +230,17 @@ function parseComments(inner, section) {
       }
     }
 
-    if (!commentText) {
-      pos++;
-      continue;
-    }
+    if (!commentText) { pos++; continue; }
 
     p = nextWS(inner, afterQuote);
-    if (p >= inner.length || inner[p] !== '(') {
-      pos = p;
-      continue;
-    }
+    if (p >= inner.length || inner[p] !== '(') { pos = p; continue; }
 
     var formulaEnd = pastSexpr(inner, p);
     var formula = inner.substring(p, formulaEnd).trim().replace(/\t/g, ' ');
     var idMatch = commentText.match(/\[([^\]]+)\]\s*$/);
     var identifier = idMatch ? idMatch[1] : null;
 
-    result.push({
-      section: section,
-      comment: commentText.replace(/\\'/g, "'").replace(/\\"/g, '"'),
-      formula: formula,
-      identifier: identifier,
-      keywords: []
-    });
-
+    result.push({ section: section, comment: commentText.replace(/\\'/g, "'").replace(/\\"/g, '"'), formula: formula, identifier: identifier });
     pos = formulaEnd;
   }
 
@@ -266,10 +255,7 @@ function extract(text) {
   var allClasses = [];
   var allRelations = [];
 
-  function nextPos(s, i) {
-    while (i < s.length && /\s/.test(s[i])) i++;
-    return i;
-  }
+  function nextPos(s, i) { while (i < s.length && /\s/.test(s[i])) i++; return i; }
 
   function parse(s, i) {
     i = nextPos(s, i);
@@ -277,13 +263,7 @@ function extract(text) {
     if (s[i] === '(') {
       i++;
       var children = [];
-      while (true) {
-        i = nextPos(s, i);
-        if (i >= s.length || s[i] === ')') break;
-        var r = parse(s, i);
-        children.push(r.node);
-        i = r.end;
-      }
+      while (true) { i = nextPos(s, i); if (i >= s.length || s[i] === ')') break; var r = parse(s, i); children.push(r.node); i = r.end; }
       i = nextPos(s, i + 1);
       return { node: children, end: i };
     }
@@ -292,56 +272,57 @@ function extract(text) {
     return { node: s.substring(start, i), end: i };
   }
 
-  function ec(v, bv) {
-    if (typeof v === 'string' && !bv.has(v)) allClasses.push(v);
-  }
+  function ec(v, bv) { if (typeof v === 'string' && !bv.has(v)) allClasses.push(v); }
 
   function walk(t, bv) {
     if (!Array.isArray(t)) return;
     var head = t[0];
     var isQuant = head === 'forall' || head === 'exists';
+    var isUniversal = head === 'universal';
+    var isParticular = head === 'particular';
     var isIns = head === 'instance-of';
 
     if (isQuant) {
       var newBv = new Set(bv);
       var varList = t[1];
-      if (Array.isArray(varList)) {
-        for (var j = 0; j < varList.length; j++) newBv.add(varList[j]);
-      } else if (typeof varList === 'string') {
-        newBv.add(varList);
+      if (Array.isArray(varList)) { for (var j = 0; j < varList.length; j++) newBv.add(varList[j]); }
+      else if (typeof varList === 'string') { newBv.add(varList); }
+      for (var i = 2; i < t.length; i++) { if (Array.isArray(t[i])) walk(t[i], newBv); }
+      return;
+    }
+
+    if (isUniversal) {
+      allRelations.push('universal');
+      for (var ui = 1; ui < t.length; ui++) {
+        if (typeof t[ui] === 'string' && !bv.has(t[ui])) { allClasses.push(t[ui]); }
+        else if (Array.isArray(t[ui])) { walk(t[ui], bv); }
       }
-      for (var i = 2; i < t.length; i++) {
-        if (Array.isArray(t[i])) walk(t[i], newBv);
-      }
+      return;
+    }
+
+    if (isParticular) {
+      for (var pi = 0; pi < t.length; pi++) { if (Array.isArray(t[pi])) walk(t[pi], bv); }
       return;
     }
 
     if (isIns && t.length >= 3) {
       var className = t[2];
       if (className && typeof className === 'string') ec(className, bv);
-      for (var i = 3; i < t.length; i++) {
-        if (Array.isArray(t[i])) walk(t[i], bv);
-      }
+      for (var i = 3; i < t.length; i++) { if (Array.isArray(t[i])) walk(t[i], bv); }
       return;
     }
 
-    if (typeof head === 'string' && !LAC.has(head)) {
-      allRelations.push(head);
-    }
+    if (typeof head === 'string' && !LAC.has(head)) { allRelations.push(head); }
 
-    for (var i = 0; i < t.length; i++) {
-      if (Array.isArray(t[i])) walk(t[i], bv);
-    }
+    for (var i = 0; i < t.length; i++) { if (Array.isArray(t[i])) walk(t[i], bv); }
   }
 
   var r = parse(text, 0);
   if (r.node) walk(r.node, new Set());
 
-  var seen = {};
-  var clsOut = [];
+  var seen = {}, clsOut = [];
   allClasses.forEach(function(c) { if (!seen[c]) { seen[c] = true; clsOut.push(c); } });
-  var seen2 = {};
-  var relOut = [];
+  var seen2 = {}, relOut = [];
   allRelations.forEach(function(r) { if (!seen2[r]) { seen2[r] = true; relOut.push(r); } });
 
   return { classes: clsOut, relations: relOut };
@@ -353,8 +334,7 @@ function showErr(msg) {
   var el = document.createElement('div');
   el.className = 'error-msg';
   el.textContent = msg;
-  var resultsEl = document.getElementById('results');
-  resultsEl.parentNode.insertBefore(el, resultsEl);
+  document.getElementById('results').parentNode.insertBefore(el, document.getElementById('results'));
 }
 
 async function loadAll() {
@@ -371,7 +351,13 @@ async function loadAll() {
     cb.checked = (gk === "BFO Axiomatization");
     cb.dataset.group = gk;
     lbl.appendChild(cb);
-    lbl.appendChild(document.createTextNode(' ' + gk));
+    var groupNameSpan = document.createTextNode(' ' + gk);
+    lbl.appendChild(groupNameSpan);
+    var countSpan = document.createElement('span');
+    countSpan.className = 'group-section-count';
+    var count = CONF[gk].sections.length;
+    countSpan.textContent = '(' + count + ' section' + (count === 1 ? '' : 's') + ')';
+    lbl.appendChild(countSpan);
     groupsEl.appendChild(lbl);
   }
 
@@ -394,46 +380,25 @@ async function loadAll() {
 
         var formulas = parseCLFile(text, section.replace('.cl', ''));
         console.log('Parsed formulas:', url, formulas.length);
-        var jsonName = section.replace('.cl', '.json');
 
         for (var fi = 0; fi < formulas.length; fi++) {
           var extracted = extract(formulas[fi].formula);
           var sectionName = section.replace('.cl', '');
           var identifier = formulas[fi].identifier || formulas[fi].comment;
-          var entry = idMap[identifier];
-          if (entry) {
-            if (entry.sections.indexOf(sectionName) === -1) {
-              entry.sections.push(sectionName);
-            }
-            for (var ci = 0; ci < extracted.classes.length; ci++) {
-              if (entry.classes.indexOf(extracted.classes[ci]) === -1) {
-                entry.classes.push(extracted.classes[ci]);
-              }
-            }
-            for (var ri = 0; ri < extracted.relations.length; ri++) {
-              if (entry.relations.indexOf(extracted.relations[ri]) === -1) {
-                entry.relations.push(extracted.relations[ri]);
-              }
-            }
+          var entry2 = idMap[identifier];
+          if (entry2) {
+            if (entry2.sections.indexOf(sectionName) === -1) entry2.sections.push(sectionName);
+            for (var cci = 0; cci < extracted.classes.length; cci++) { if (entry2.classes.indexOf(extracted.classes[cci]) === -1) entry2.classes.push(extracted.classes[cci]); }
+            for (var tri = 0; tri < extracted.relations.length; tri++) { if (entry2.relations.indexOf(extracted.relations[tri]) === -1) entry2.relations.push(extracted.relations[tri]); }
           } else {
-            var entry = {
-              comment: formulas[fi].comment.replace(/\\'/g, "'").replace(/\\"/g, '"'),
-              formula: formulas[fi].formula,
-              identifier: identifier,
-              formulaId: formulas[fi].identifier || null,
-              group: groupKey2,
-              file: sectionName + '.json',
-              sections: [sectionName],
-              classes: extracted.classes,
-              relations: extracted.relations
-            };
+            var entry = { comment: formulas[fi].comment.replace(/\\'/g, "'").replace(/\\"/g, '"'), formula: formulas[fi].formula, identifier: identifier, formulaId: formulas[fi].identifier || null, group: groupKey2, file: sectionName + '.json', sections: [sectionName], classes: extracted.classes, relations: extracted.relations };
             idMap[identifier] = entry;
           }
         }
-      } catch (err) {
+      } catch (eerr) {
         errCount++;
-        console.error('Failed:', section, err);
-        showErr('Failed: ' + section + ' - ' + err);
+        console.error('Failed:', section, eerr);
+        showErr('Failed: ' + section + ' - ' + eerr);
       }
     }
   }
@@ -444,17 +409,9 @@ async function loadAll() {
   for (var gi = 0; gi < FIXED_ORDER.length; gi++) {
     var fg = FIXED_ORDER[gi];
     var groupItems = [];
-    for (var di = DATA.length - 1; di >= 0; di--) {
-      if (DATA[di].group === fg) {
-        groupItems.push(DATA.splice(di, 1)[0]);
-      }
-    }
-    groupItems.sort(function(a, b) {
-      return (a.formula || '').length - (b.formula || '').length;
-    });
-    for (var j = 0; j < groupItems.length; j++) {
-      newData.push(groupItems[j]);
-    }
+    for (var di = DATA.length - 1; di >= 0; di--) { if (DATA[di].group === fg) { groupItems.push(DATA.splice(di, 1)[0]); } }
+    groupItems.sort(function(a, b) { return (a.formula || '').length - (b.formula || '').length; });
+    for (var j = 0; j < groupItems.length; j++) { newData.push(groupItems[j]); }
   }
   DATA = newData;
 
@@ -463,22 +420,15 @@ async function loadAll() {
 
 // === Render ===
 
-function escapeHtml(s) {
-  return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
-}
-
-function escapeRegex(s) {
-  return s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-}
+function escapeHtml(s) { return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); }
+function escapeRegex(s) { return s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); }
 
 function highlightText(text, query) {
   if (!query) return escapeHtml(text);
   return escapeHtml(text).replace(new RegExp('(' + escapeRegex(query) + ')', 'gi'), '<span class="highlight">$1</span>');
 }
 
-function escapeAttr(s) {
-  return s.replace(/&/g, '&amp;').replace(/"/g, '&#34;');
-}
+function escapeAttr(s) { return s.replace(/&/g, '&amp;').replace(/"/g, '&#34;'); }
 
 function getActiveGroups() {
   var out = [];
@@ -490,27 +440,30 @@ function getActiveGroups() {
 function filterFormulas(query, activeGroups) {
   var filtered = DATA;
   if (activeGroups.length > 0) {
-    filtered = DATA.filter(function(item) {
-      return activeGroups.indexOf(item.group) !== -1;
-    });
+    filtered = DATA.filter(function(item) { return activeGroups.indexOf(item.group) !== -1; });
   } else {
     filtered = [];
+  }
+  if (activeSectionFilter) {
+    filtered = filtered.filter(function(item) { return item.sections && item.sections.indexOf(activeSectionFilter) !== -1; });
   }
   if (!query) return filtered;
   var words = query.trim().toLowerCase().split(/\s+/).filter(function(w) { return w.length > 0; });
   return filtered.filter(function(item) {
-    var searchable = [item.comment, item.formulaId]
-      .concat(item.classes).concat(item.relations)
-      .concat(item.sections || []).join(' ').toLowerCase();
-    for (var w = 0; w < words.length; w++) {
-      if (searchable.indexOf(words[w]) === -1) return false;
-    }
+    var searchable = [item.comment, item.formulaId].concat(item.classes).concat(item.relations).concat(item.sections || []).join(' ').toLowerCase();
+    for (var w = 0; w < words.length; w++) { if (searchable.indexOf(words[w]) === -1) return false; }
     return true;
   });
 }
 
 function renderResults(results, query) {
-  document.getElementById('stats').textContent = results.length + ' of ' + DATA.length + ' formulas';
+  var statsEl = document.getElementById('stats');
+  var pillHtml = '';
+  if (activeSectionFilter) {
+    pillHtml = '<span class="section-pill">' + escapeHtml(activeSectionFilter) + ' <span class="section-pill-clear" onclick="clearSectionFilter()">×</span></span> ';
+  }
+  statsEl.innerHTML = pillHtml + results.length + ' of ' + DATA.length + ' formulas';
+
   if (results.length === 0) {
     document.getElementById('results').innerHTML = '<div class="no-results">No formulas match your search.</div>';
     return;
@@ -518,52 +471,35 @@ function renderResults(results, query) {
   var html = '';
   for (var i = 0; i < results.length; i++) {
     var item = results[i];
-    html += '<div class="card">';
-    html += '<div class="card-header">';
-    html += '<span class="formula-id">' + highlightText(item.formulaId || '', query) + '</span>';
+    html += '<div class="card"><div class="card-header"><span class="formula-id">' + highlightText(item.formulaId || '', query) + '</span>';
     if (item.sections) {
       for (var sti = 0; sti < item.sections.length; sti++) {
-        html += '<span class="file-tag">' + highlightText(item.sections[sti], query) + '</span>';
+        html += '<span class="file-tag' + (item.sections.length <= 1 ? ' section-clickable' : '') + '" onclick="clickSectionTag(\'' + escapeAttr(item.sections[sti]) + '\')">' + highlightText(item.sections[sti], query) + '</span>';
       }
     } else {
       html += '<span class="file-tag">' + highlightText(item.file ? item.file.replace(/\.[^.]+$/, '') : '', query) + '</span>';
     }
-    html += '<span class="group-tag">' + highlightText(item.group, query) + '</span>';
-    html += '</div>';
+    html += '<span class="group-tag">' + highlightText(item.group, query) + '</span></div>';
     html += '<div class="comment">' + highlightText(item.comment, query) + '</div>';
 
     if (item.formula) {
       var display = escapeHtml(item.formula);
       if (query) {
         var qWords = query.trim().toLowerCase().split(/\s+/).filter(function(w) { return w.length > 0; });
-        for (var wi = 0; wi < qWords.length; wi++) {
-          var re = new RegExp('(' + escapeRegex(qWords[wi]) + ')', 'gi');
-          display = display.replace(re, '<mark class="highlight">$1</mark>');
-        }
+        for (var wi = 0; wi < qWords.length; wi++) { display = display.replace(new RegExp('(' + escapeRegex(qWords[wi]) + ')', 'gi'), '<mark class="highlight">$1</mark>'); }
       }
       html += '<div class="formula-text">' + display + '</div>';
     }
 
     var issuesHtml = renderInlineIssues(item);
-    if (issuesHtml) {
-      html += '<div style="margin-top:-0.5rem;">' + issuesHtml + '</div>';
-    }
+    if (issuesHtml) { html += '<div style="margin-top:-0.5rem;">' + issuesHtml + '</div>'; }
 
     if (item.classes.length > 0 || item.relations.length > 0) {
-      html += '<div class="keywords">';
-      if (item.classes.length > 0) {
-        for (var ci = 0; ci < item.classes.length; ci++) {
-          html += '<span class="badge badge-class" onclick="clickBadge(this)" data-bt="' + escapeAttr(item.classes[ci]) + '">' + highlightText(item.classes[ci], query) + '</span>';
-        }
-      }
-      if (item.relations.length > 0) {
-        for (var ri = 0; ri < item.relations.length; ri++) {
-          html += '<span class="badge badge-rel" onclick="clickBadge(this)" data-bt="' + escapeAttr(item.relations[ri]) + '">' + highlightText(item.relations[ri], query) + '</span>';
-        }
-      }
+      html += '<div class="badge-wrap">';
+      if (item.classes.length > 0) { for (var ci = 0; ci < item.classes.length; ci++) { html += '<span class="badge badge-class" onclick="clickBadge(this)" data-bt="' + escapeAttr(item.classes[ci]) + '">' + highlightText(item.classes[ci], query) + '</span>'; } }
+      if (item.relations.length > 0) { for (var ri = 0; ri < item.relations.length; ri++) { html += '<span class="badge badge-rel" onclick="clickBadge(this)" data-bt="' + escapeAttr(item.relations[ri]) + '">' + highlightText(item.relations[ri], query) + '</span>'; } }
       html += '</div>';
     }
-
     html += '</div>';
   }
   document.getElementById('results').innerHTML = html;
@@ -571,49 +507,85 @@ function renderResults(results, query) {
 
 function clickBadge(el) {
   var text = el.getAttribute('data-bt');
-  if (text) {
-    document.getElementById('search-input').value = text;
-    refreshResults();
-    window.scrollTo(0, 0);
-  }
+  if (text) { document.getElementById('search-input').value = text; refreshResults(); window.scrollTo(0, 0); }
+}
+
+function clickSectionTag(sectionName) {
+  activeSectionFilter = sectionName;
+  clearDebounceTimer();
+  refreshResults();
+  window.scrollTo(0, 0);
+}
+
+function clearSectionFilter() {
+  activeSectionFilter = null;
+  clearDebounceTimer();
+  refreshResults();
 }
 
 var debounceTimer;
+function clearDebounceTimer() { clearTimeout(debounceTimer); }
+
 function refreshResults() {
   var query = document.getElementById('search-input').value.trim();
   var groups = getActiveGroups();
   renderResults(filterFormulas(query, groups), query);
 }
 
-document.getElementById('search-input').addEventListener('input', function() {
-  clearTimeout(debounceTimer);
-  debounceTimer = setTimeout(refreshResults, 150);
+document.getElementById('search-input').addEventListener('input', function() { showClearBtn(); clearDebounceTimer(); debounceTimer = setTimeout(refreshResults, 150); });
+
+function showClearBtn() {
+  var btn = document.getElementById('search-clear');
+  btn.style.display = document.getElementById('search-input').value.trim() ? 'block' : 'none';
+}
+
+document.getElementById('search-clear').addEventListener('click', function() {
+  document.getElementById('search-input').value = '';
+  showClearBtn();
+  refreshResults();
 });
 
 document.getElementById('results').addEventListener('click', function(e) {
-  if (e.target.classList.contains('badge')) {
-    clickBadge(e.target);
-  }
+  if (e.target.classList.contains('badge')) { clickBadge(e.target); }
 });
 
+// Batch highlight: mouseover a badge or file-tag -> bold it
+var _batchTarget = null;
+function doBatchHighlight(e) {
+  var t = e.target;
+  if (!t.classList.contains('badge') && !t.classList.contains('file-tag')) return;
+  if (_batchTarget === t) return;
+  unsetBatchHighlight();
+  _batchTarget = t;
+  t.style.fontWeight = '700';
+}
+function unsetBatchHighlight(e) {
+  var t = _batchTarget;
+  _batchTarget = null;
+  if (t && (t.classList.contains('badge') || t.classList.contains('file-tag'))) {
+    t.style.fontWeight = '';
+  }
+}
+
+document.getElementById('results').addEventListener('mouseover', doBatchHighlight);
+document.getElementById('results').addEventListener('mouseout', unsetBatchHighlight);
+
 document.getElementById('group-filters').addEventListener('change', function() {
-  clearTimeout(debounceTimer);
+  activeSectionFilter = null;
+  clearDebounceTimer();
   debounceTimer = setTimeout(refreshResults, 50);
 });
 
+// === GitHub Issues ===
 
-// === GitHub Issues (shown inline with formulas) ===
-
-var ISSUE_MAP = {}; // code -> [issues]
+var ISSUE_MAP = {};
 var ISSUE_CODE_RE = /\b([a-z]{3}-\d)\b/g;
 
 function parseIssueCodes(title) {
   ISSUE_CODE_RE.lastIndex = 0;
   var codes = [];
   var m;
-  while ((m = ISSUE_CODE_RE.exec(title)) !== null) {
-    codes.push(m[1]);
-  }
+  while ((m = ISSUE_CODE_RE.exec(title)) !== null) { codes.push(m[1]); }
   return codes;
 }
 
@@ -626,16 +598,11 @@ function loadIssues() {
       for (var ii = 0; ii < issues.length; ii++) {
         var issue = issues[ii];
         var codes = parseIssueCodes(issue.title);
-        for (var c = 0; c < codes.length; c++) {
-          if (!ISSUE_MAP[codes[c]]) ISSUE_MAP[codes[c]] = [];
-          ISSUE_MAP[codes[c]].push(issue);
-        }
+        for (var c = 0; c < codes.length; c++) { if (!ISSUE_MAP[codes[c]]) ISSUE_MAP[codes[c]] = []; ISSUE_MAP[codes[c]].push(issue); }
       }
       refreshResults();
     })
-    .catch(function(err) {
-      console.error('Issues load failed:', err);
-    });
+    .catch(function(err) { console.error('Issues load failed:', err); });
 }
 
 function renderInlineIssues(formulaItem) {
@@ -646,17 +613,12 @@ function renderInlineIssues(formulaItem) {
   var html = '';
   for (var i = 0; i < issues.length; i++) {
     var issue = issues[i];
-    html += '<div class="issue-inline">';
-    html += '<span class="issue-num">#' + escapeHtml(String(issue.number)) + '</span> ';
+    html += '<div class="issue-inline"><span class="issue-num">#' + escapeHtml(String(issue.number)) + '</span> ';
     html += '<a class="issue-link" href="' + escapeHtml(issue.html_url) + '" target="_blank">' + escapeHtml(issue.title) + '</a>';
-    html += ' ';
-    html += '<span class="issue-state ' + issue.state + '">' + escapeHtml(issue.state) + '</span>';
-    html += '</div>';
+    html += ' <span class="issue-state ' + issue.state + '">' + escapeHtml(issue.state) + '</span></div>';
   }
   return html;
 }
-
-function stateClass(s) { return s === 'open' ? 'issue-state open' : 'issue-state closed'; }
 
 // Start loading issues and formulas when page loads
 loadAll();
