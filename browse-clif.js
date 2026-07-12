@@ -5,6 +5,7 @@ var activeSectionFilter = null;
 var debounceTimer;
 
 var termDb = {}; // lowercase term -> parsed CSV row object
+var sectionToEntry = {}; // section number like 'A.1.2.30' -> entry object
 var matchedBadges = []; // badges clicked for term lookup
 
 // === CSV Parsing ===
@@ -112,6 +113,9 @@ function loadTermDb() {
         note: noteText.trim()
       };
       termDb['bfo-' + matchKey] = entry;
+      if (entry.section) {
+        sectionToEntry[entry.section] = entry;
+      }
       termDb[matchKey] = entry;
       var spaceTerm = term.toLowerCase();
       var hyphenTerm = spaceTerm.replace(/\s+/g, '-');
@@ -165,7 +169,28 @@ function lookupTerms(query, badgeTexts) {
   for (var m = 0; m < matched.length; m++) {
     if (!seen[matched[m].term]) { seen[matched[m].term] = true; out.push(matched[m]); }
   }
-  return out.slice(0, 3);
+  return out;
+}
+
+// === Section reference resolution ===
+
+function resolveSectionRefs(text) {
+  if (!text) return text;
+  // First: ranges like "A.1.2.30–A.1.2.33" -> "zero-dimensional spatial region - three-dimensional spatial region"
+  text = text.replace(/\b([A-D]\.[0-9]+(?:\.[0-9]+)*)[\u2013\u2014]\s*([A-D]\.[0-9]+(?:\.[0-9]+)*)/g, function(match, start, end) {
+    var sEntry = sectionToEntry[start.trim()];
+    var eEntry = sectionToEntry[end.trim()];
+    if (sEntry && eEntry) return sEntry.term + ' - ' + eEntry.term;
+    if (sEntry) return sEntry.term;
+    if (eEntry) return eEntry.term;
+    return match;
+  });
+  // Second: standalone section references like "A.1.2.30"
+  text = text.replace(/\b([A-D]\.[0-9]+(?:\.[0-9]+)*)\b/g, function(match, section) {
+    var entry = sectionToEntry[section.trim()];
+    return entry ? entry.term : match;
+  });
+  return text;
 }
 
 function renderTermPanel(termEntries) {
@@ -183,8 +208,8 @@ function renderTermPanel(termEntries) {
     if (entry.range) { html += makeTermRow('Range', entry.range); }
     if (entry.elucidation) { html += makeTermRow('Elucidation', entry.elucidation); }
     if (entry.definition) { html += makeTermRow('Definition', entry.definition); }
-    if (entry.examples) { html += makeTermRow('Examples', entry.examples); }
-    if (entry.note && entry.note.trim()) { html += makeTermRow('Note', entry.note.trim()); }
+    if (entry.examples) { html += makeTermRow('Examples', resolveSectionRefs(entry.examples)); }
+    if (entry.note && entry.note.trim()) { html += makeTermRow('Note', resolveSectionRefs(entry.note.trim())); }
   }
   panel.innerHTML = html;
 }
@@ -557,7 +582,7 @@ function filterFormulas(query, activeGroups) {
   if (!query) return filtered;
   var words = query.trim().toLowerCase().split(/\s+/).filter(function(w) { return w.length > 0; });
   return filtered.filter(function(item) {
-    var searchable = [item.comment, item.formulaId].concat(item.classes).concat(item.relations).concat(item.sections || []).join(' ').toLowerCase();
+    var searchable = [item.comment, item.formulaId].concat(item.classes).concat(item.relations).join(' ').toLowerCase();
     for (var w = 0; w < words.length; w++) { if (searchable.indexOf(words[w]) === -1) return false; }
     return true;
   });
