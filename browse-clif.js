@@ -4,6 +4,199 @@ var DATA = [];
 var activeSectionFilter = null;
 var debounceTimer;
 
+var termDb = {}; // lowercase term -> parsed CSV row object
+var matchedBadges = []; // badges clicked for term lookup
+
+// === CSV Parsing ===
+
+function parseValue(s, pos) {
+  if (pos >= s.length) return ['', s.length];
+  if (s[pos] === '"') {
+    var result = '';
+    pos++; // skip opening quote
+    while (pos < s.length) {
+      if (s[pos] === '"' && pos + 1 < s.length && s[pos + 1] === '"') {
+        result += '"';
+        pos += 2;
+      } else if (s[pos] === '"') {
+        pos++; // skip closing quote
+        break;
+      } else {
+        result += s[pos];
+        pos++;
+      }
+    }
+    return [result, pos];
+  }
+  var start = pos;
+  while (pos < s.length && s[pos] !== ',' && s[pos] !== '\n' && s[pos] !== '\r') {
+    pos++;
+  }
+  return [s.substring(start, pos), pos];
+}
+
+function parseCsvRows(text) {
+  // Strip BOM if present
+  if (text.charCodeAt(0) === 0xFEFF) text = text.substring(1);
+  var rows = [];
+  var row = [];
+  var cell = '';
+  var inQuote = false;
+  for (var i = 0; i < text.length; i++) {
+    var c = text[i];
+    if (inQuote) {
+      if (c === '"') {
+        if (i + 1 < text.length && text[i + 1] === '"') { cell += '"'; i++; }
+        else { inQuote = false; }
+      } else if (c === '\r') { cell += '\n'; if (i + 1 < text.length && text[i + 1] === '\n') i++; }
+      else { cell += c; }
+    } else {
+      if (c === '"' && cell.length === 0) { inQuote = true; }
+      else if (c === ',') { row.push(cell); cell = ''; }
+      else if (c === '\n' || c === '\r') {
+        row.push(cell);
+        cell = '';
+        if (row.length > 0) rows.push(row);
+        row = [];
+        if (c === '\r' && i + 1 < text.length && text[i + 1] === '\n') i++;
+      } else {
+        cell += c;
+      }
+    }
+  }
+  // push remaining fields in final row
+  if (cell || row.length > 0) { row.push(cell); }
+  // trim trailing empty rows
+  while (row.length && row[row.length - 1].trim() === '') row.pop();
+  if (row.length > 0) rows.push(row);
+  return rows;
+}
+
+function loadTermDb() {
+  var url = CONF["BFO Axiomatization"]["term documentation"];
+  fetch(url).then(function(r) { return r.text(); }).then(function(text) {
+    var rows = parseCsvRows(text);
+    if (rows.length < 2) return;
+    var hdrs = rows[0].map(function(h) { return h.trim().toLowerCase().replace(/\s+/g, '_'); });
+    function col(name) { var i = hdrs.indexOf(name); return i >= 0 ? i : -1; }
+    var c_section = col('section'), c_term = col('term/relational_expression'),
+        c_elucidation = col('elucidation'), c_definition = col('definition'),
+        c_examples = col('examples'), c_domain = col('domain'), c_range = col('range'),
+        c_synonyms = col('synonyms'), c_bfo_id = col('bfo_id')
+    // Handle duplicate "note" columns (BFO CSV has note in both col index 9 and 10)
+    var note_indices = [];
+    for (var ni = 0; ni < hdrs.length; ni++) { if (hdrs[ni] === 'note') note_indices.push(ni); }
+    var c_note_1 = note_indices[0] >= 0 ? note_indices[0] : -1;
+    var c_note_2 = note_indices[1] >= 0 ? note_indices[1] : -1;
+    for (var i = 1; i < rows.length; i++) {
+      var row = rows[i];
+      if (!row[c_term] || !row[c_term].trim().toLowerCase()) continue;
+      var term = row[c_term].trim();
+      var bfoId = c_bfo_id >= 0 && row[c_bfo_id] ? row[c_bfo_id].trim() : '';
+      var matchKey = bfoId.replace(/^\[/, '').replace(/\]$/, '').toLowerCase();
+      var synsCol = c_synonyms >= 0 ? row[c_synonyms] : '';
+      var synonyms = synsCol.split(/[;,/]/).map(function(s) { return s.trim().toLowerCase(); }).filter(Boolean);
+      var n1 = c_note_1 >= 0 && row[c_note_1] ? row[c_note_1].trim() : '';
+      var n2 = c_note_2 >= 0 && row[c_note_2] ? row[c_note_2].trim() : '';
+      var noteText = n1 + (n1 && n2 ? ' ' : '') + (n2 || '');
+      var entry = {
+        term: term,
+        section: c_section >= 0 && row[c_section] ? row[c_section].trim() : '',
+        elucidation: c_elucidation >= 0 && row[c_elucidation] ? row[c_elucidation].trim() : '',
+        definition: c_definition >= 0 && row[c_definition] ? row[c_definition].trim() : '',
+        examples: c_examples >= 0 && row[c_examples] ? row[c_examples].trim() : '',
+        domain: c_domain >= 0 && row[c_domain] ? row[c_domain].trim() : '',
+        range: c_range >= 0 && row[c_range] ? row[c_range].trim() : '',
+        synonyms: synsCol.trim(),
+        bfo_id: bfoId,
+        note: noteText.trim()
+      };
+      termDb['bfo-' + matchKey] = entry;
+      termDb[matchKey] = entry;
+      var spaceTerm = term.toLowerCase();
+      var hyphenTerm = spaceTerm.replace(/\s+/g, '-');
+      termDb[spaceTerm] = entry;
+      if (hyphenTerm !== spaceTerm) termDb[hyphenTerm] = entry;
+      for (var j = 0; j < synonyms.length; j++) {
+        var s = synonyms[j];
+        termDb[s] = entry;
+        var sHyphen = s.replace(/\s+/g, '-');
+        if (sHyphen !== s) termDb[sHyphen] = entry;
+      }
+    }
+  });
+}
+
+function lookupTerms(query, badgeTexts) {
+  var matched = [];
+  if (!query && (!badgeTexts || badgeTexts.length === 0)) return matched;
+  
+  var searches = (badgeTexts || []).slice();
+  if (query !== undefined) {
+    searches = searches.concat(query.trim().toLowerCase().split(/\s+/).filter(function(w) { return w.length > 0; }));
+  }
+  
+  for (var i = 0; i < searches.length; i++) {
+    var s = searches[i].trim().toLowerCase();
+    if (!s) continue;
+    
+    // Exact match
+    if (termDb[s]) { matched.push(termDb[s]); continue; }
+    
+    // Try matching query as prefix of term key
+    for (var key in termDb) {
+      if (key.indexOf(s) === 0 && !matched.includes(termDb[key])) {
+        matched.push(termDb[key]);
+      }
+    }
+    
+    // Multi-word: try matching first word as prefix of term
+    var words = s.split(/\s+/);
+    if (words.length > 1) {
+      for (var key2 in termDb) {
+        if (key2.indexOf(words[0]) === 0 && !matched.includes(termDb[key2])) {
+          matched.push(termDb[key2]);
+        }
+      }
+    }
+  }
+  
+  var seen = {}; var out = [];
+  for (var m = 0; m < matched.length; m++) {
+    if (!seen[matched[m].term]) { seen[matched[m].term] = true; out.push(matched[m]); }
+  }
+  return out.slice(0, 3);
+}
+
+function renderTermPanel(termEntries) {
+  var panel = document.getElementById('term-info-panel');
+  if (!panel || !termEntries.length) { clearTermPanel(); return; }
+  var html = '';
+  for (var t = 0; t < termEntries.length; t++) {
+    var entry = termEntries[t];
+    html += '<div class="term-info-header">' + escapeHtml(entry.term) + '</div>';
+    if (entry.synonyms) {
+      var isPlural = entry.synonyms.indexOf(',') !== -1;
+      html += makeTermRow(isPlural ? 'Synonyms' : 'Synonym', entry.synonyms.toUpperCase());
+    }
+    if (entry.domain) { html += makeTermRow('Domain', entry.domain); }
+    if (entry.range) { html += makeTermRow('Range', entry.range); }
+    if (entry.elucidation) { html += makeTermRow('Elucidation', entry.elucidation); }
+    if (entry.definition) { html += makeTermRow('Definition', entry.definition); }
+    if (entry.examples) { html += makeTermRow('Examples', entry.examples); }
+    if (entry.note && entry.note.trim()) { html += makeTermRow('Note', entry.note.trim()); }
+  }
+  panel.innerHTML = html;
+}
+
+function clearTermPanel() {
+  document.getElementById('term-info-panel').innerHTML = '';
+}
+
+function makeTermRow(label, text) {
+  return '<div class="term-info-row"><span class="term-info-label">' + escapeHtml(label) + ':</span> <span class="term-info-text">' + escapeHtml(text) + '</span></div>';
+}
+
 // === S-expression helpers ===
 
 function nextWS(s, i) {
@@ -421,7 +614,7 @@ function renderResults(results, query) {
 
 function clickBadge(el) {
   var text = el.getAttribute('data-bt');
-  if (text) { activeSectionFilter = null; document.getElementById('search-input').value = text; showClearBtn(); refreshResults(); window.scrollTo(0, 0); }
+  if (text) { activeSectionFilter = null; matchedBadges.push(text); document.getElementById('search-input').value = text; showClearBtn(); refreshResults(); window.scrollTo(0, 0); }
 }
 
 function clickSectionTag(sectionName) {
@@ -444,7 +637,46 @@ function clearDebounceTimer() { clearTimeout(debounceTimer); }
 function refreshResults() {
   var query = document.getElementById('search-input').value.trim();
   var groups = getActiveGroups();
-  renderResults(filterFormulas(query, groups), query);
+  var filtered = filterFormulas(query, groups);
+  renderResults(filtered, query);
+  if (Object.keys(termDb).length > 0) {
+    // Only show panel when checked groups have formulas loaded AND there's a search/badge match
+    var hasDataForGroups = false;
+    for (var gi = 0; gi < groups.length && !hasDataForGroups; gi++) {
+      for (var di = 0; di < DATA.length && !hasDataForGroups; di++) {
+        if (DATA[di].group === groups[gi]) hasDataForGroups = true;
+      }
+    }
+    var queries = [];
+    if (query) queries.push(query.trim().toLowerCase());
+    (matchedBadges || []).forEach(function(b) { if (b) queries.push(b.toLowerCase()); });
+    if (queries.length > 0 && hasDataForGroups) {
+      // Collect all unique class/relation names from ALL data in selected groups
+      var groupTerms = new Set();
+      for (var di = 0; di < DATA.length; di++) {
+        if (groups.indexOf(DATA[di].group) !== -1) {
+          DATA[di].classes.concat(DATA[di].relations).forEach(function(name) {
+            var low = name.toLowerCase().replace(/\s+/g, '-');
+            groupTerms.add(low);
+            groupTerms.add(name.toLowerCase());
+          });
+        }
+      }
+      var results = lookupTerms(query, matchedBadges);
+      // Only show terms that exist in selected groups
+      var shown = [];
+      for (var si = 0; si < results.length && shown.length < 3; si++) {
+        var termLow = results[si].term.toLowerCase().replace(/\s+/g, '-');
+        if (groupTerms.has(termLow) || groupTerms.has(results[si].term.toLowerCase())) shown.push(results[si]);
+      }
+      renderTermPanel(shown);
+    } else {
+      clearTermPanel();
+    }
+    matchedBadges = [];
+  } else {
+    clearTermPanel();
+  }
 }
 
 document.getElementById('search-input').addEventListener('input', function() { showClearBtn(); clearDebounceTimer(); debounceTimer = setTimeout(refreshResults, 150); });
@@ -545,3 +777,4 @@ function renderInlineIssues(formulaItem) {
 // Start loading issues and formulas when page loads
 loadAll();
 loadIssues();
+loadTermDb();
