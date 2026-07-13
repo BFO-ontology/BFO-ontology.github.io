@@ -108,7 +108,7 @@ function loadTermDb() {
         examples: c_examples >= 0 && row[c_examples] ? row[c_examples].trim() : '',
         domain: c_domain >= 0 && row[c_domain] ? row[c_domain].trim() : '',
         range: c_range >= 0 && row[c_range] ? row[c_range].trim() : '',
-        synonyms: synsCol.trim(),
+        synonyms: synonyms.join('; '),
         bfo_id: bfoId,
         note: noteText.trim()
       };
@@ -202,7 +202,7 @@ function renderTermPanel(termEntries) {
     html += '<div class="term-info-header">' + escapeHtml(entry.term) + '</div>';
     if (entry.synonyms) {
       var isPlural = entry.synonyms.indexOf(',') !== -1;
-      html += makeTermRow(isPlural ? 'Synonyms' : 'Synonym', entry.synonyms.toUpperCase());
+      html += makeTermRow(entry.synonyms.indexOf(';') !== -1 ? 'Synonyms' : 'Synonym', entry.synonyms);
     }
     if (entry.domain) { html += makeTermRow('Domain', entry.domain); }
     if (entry.range) { html += makeTermRow('Range', entry.range); }
@@ -678,14 +678,12 @@ function refreshResults() {
     if (queries.length > 0 && hasDataForGroups) {
       // Collect all unique class/relation names from ALL data in selected groups
       var groupTerms = new Set();
-      for (var di = 0; di < DATA.length; di++) {
-        if (groups.indexOf(DATA[di].group) !== -1) {
-          DATA[di].classes.concat(DATA[di].relations).forEach(function(name) {
-            var low = name.toLowerCase().replace(/\s+/g, '-');
-            groupTerms.add(low);
-            groupTerms.add(name.toLowerCase());
-          });
-        }
+      for (var di = 0; di < filtered.length; di++) {
+        filtered[di].classes.concat(filtered[di].relations).forEach(function(name) {
+          var low = name.toLowerCase().replace(/\s+/g, '-');
+          groupTerms.add(low);
+          groupTerms.add(name.toLowerCase());
+        });
       }
       var results = lookupTerms(query, matchedBadges);
       // Only show terms that exist in selected groups
