@@ -1,3 +1,6 @@
+var ABOUT_LINK = typeof ABOUT !== 'undefined' ? ABOUT : '#';
+document.getElementById('about-link').href = ABOUT_LINK;
+
 var GROUP_NAMES = Object.keys(CONF);
 
 var DATA = [];
