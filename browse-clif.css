@@ -48,7 +48,8 @@ h1 { font-size: 1.5rem; font-weight: 600; color: #0f172a; line-height: 1.3; }
 .term-info-label { font-weight: 700; color: #334155; }
 .term-info-text { color: #1e293b; }
 @media (max-width: 650px) {
-  .header-row { flex-wrap: wrap; }
+  .header-row { flex-wrap: wrap; gap: 0.4rem; }
+  .group-filters-column { padding-top: 0 !important; margin-top: 0 !important; }
   body { padding: 0.5rem; }
   .card { padding: 0.6rem 0.4rem; }
   .comment { margin-top: 0.3rem !important; }
